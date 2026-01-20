@@ -3,6 +3,360 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Прокат скутеров и велосипедов в Судаке | Аренда 2026</title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Аренда скутеров, велосипедов и сапбордов в Судаке. Низкие цены, исправная техника, удобное расположение на сезон 2026.">
+    <meta name="keywords" content="прокат скутеров судак 2026, аренда велосипедов судак, электросамокаты судак цена, сапборды судак">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700;900&family=Space+Grotesk:wght@300;500;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        :root {
+            --accent: #0066FF;
+            --dark: #121212;
+            --light: #F5F5F7;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--light);
+            color: var(--dark);
+            scroll-behavior: smooth;
+        }
+        .grotesk {
+            font-family: 'Space Grotesk', sans-serif;
+        }
+        .text-huge {
+            font-size: clamp(3rem, 15vw, 12rem);
+            line-height: 0.85;
+            letter-spacing: -0.05em;
+        }
+        .tg-float {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 100;
+            background: #229ED9;
+            color: white;
+            padding: 15px;
+            border-radius: 50%;
+            box-shadow: 0 10px 25px rgba(34, 158, 217, 0.3);
+            transition: transform 0.3s ease;
+        }
+        .tg-float:hover { transform: scale(1.1) rotate(10deg); }
+        
+        .faq-item { border-bottom: 1px solid #e5e7eb; }
+        .faq-question { cursor: pointer; padding: 1.5rem 0; display: flex; justify-content: space-between; align-items: center; }
+        .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.4s ease-out; color: #4b5563; }
+        .faq-item.active .faq-answer { max-height: 300px; padding-bottom: 1.5rem; }
+        .faq-item.active .faq-icon { transform: rotate(45deg); }
+        .faq-icon { transition: transform 0.3s ease; }
+
+        .view-section { transition: opacity 0.4s ease; }
+        .hidden-view { display: none; opacity: 0; }
+        
+        .seo-section p { margin-bottom: 1.5rem; line-height: 1.8; color: #374151; }
+    </style>
+</head>
+<body class="overflow-x-hidden">
+
+    <!-- Кнопка Telegram -->
+    <a href="https://t.me/your_telegram_link" target="_blank" class="tg-float" title="Написать в Telegram">
+        <i data-lucide="send"></i>
+    </a>
+
+    <!-- Общая навигация -->
+    <nav class="fixed top-0 w-full z-50 mix-blend-difference text-white p-6 flex justify-between items-center">
+        <a href="javascript:void(0)" onclick="switchView('home')" class="grotesk font-bold text-2xl tracking-tighter uppercase">
+            Судак / Прокат
+        </a>
+        <div class="hidden md:flex gap-8 uppercase text-xs font-bold tracking-widest">
+            <a href="javascript:void(0)" onclick="switchView('home')" class="hover:opacity-50">Главная</a>
+            <a href="javascript:void(0)" onclick="switchView('bikes')" class="hover:opacity-50">Велосипеды</a>
+            <a href="#prices" class="hover:opacity-50">Цены</a>
+            <a href="#contacts" class="hover:opacity-50">Контакты</a>
+        </div>
+        <div class="md:hidden">
+            <i data-lucide="menu"></i>
+        </div>
+    </nav>
+
+    <!-- ГЛАВНАЯ СТРАНИЦА -->
+    <div id="view-home" class="view-section">
+        <header class="min-h-screen flex flex-col justify-end p-6 pb-20 relative bg-white">
+            <div class="absolute top-20 right-6 opacity-10 hidden lg:block">
+                <p class="text-huge font-black grotesk uppercase leading-none">RIDE<br>FREELY</p>
+            </div>
+            <h1 class="text-huge font-black grotesk uppercase mb-8">Прокат<br>Судак</h1>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 items-end">
+                <div>
+                    <p class="max-w-xs text-lg font-light leading-snug text-zinc-600">
+                        Скутеры, электросамокаты, велосипеды и сапборды для ваших лучших прогулок по побережью Крыма в сезоне 2026.
+                    </p>
+                </div>
+                <div class="flex flex-col gap-4">
+                    <div class="flex items-center gap-2">
+                        <span class="w-12 h-[1px] bg-black"></span>
+                        <address class="not-italic text-xs font-bold uppercase tracking-widest">ул. Юбилейная 3/4</address>
+                    </div>
+                    <a href="tel:+79785306550" class="text-2xl font-bold">+7 (978) 530-65-50</a>
+                </div>
+                <div class="flex justify-start md:justify-end">
+                    <a href="#prices" class="bg-black text-white px-8 py-4 rounded-full grotesk font-bold hover:bg-blue-600 transition-colors uppercase tracking-tight">Цены 2026</a>
+                </div>
+            </div>
+        </header>
+
+        <!-- Секция Цен -->
+        <section id="prices" class="py-24 px-6 bg-[#121212] text-white">
+            <div class="flex flex-col md:flex-row gap-12 max-w-7xl mx-auto">
+                <div class="md:w-1/4">
+                    <h2 class="text-5xl font-black grotesk uppercase sticky top-24">Прайс<br>2026</h2>
+                </div>
+                <div class="md:w-3/4 space-y-12">
+                    <article>
+                        <h3 class="text-blue-500 text-xs font-bold uppercase tracking-[0.3em] mb-6">01 / Техника</h3>
+                        <div class="space-y-4">
+                            <div class="flex justify-between items-end border-b border-zinc-800 pb-4">
+                                <span class="text-2xl grotesk">Скутеры (50cc - 125cc)</span>
+                                <span class="text-xl font-bold">от 1500₽ / сут.</span>
+                            </div>
+                            <div class="flex justify-between items-end border-b border-zinc-800 pb-4">
+                                <span class="text-2xl grotesk">Велосипеды (горные/городские)</span>
+                                <span class="text-xl font-bold text-blue-400">от 200₽ / час</span>
+                            </div>
+                            <div class="flex justify-between items-end border-b border-zinc-800 pb-4">
+                                <span class="text-2xl grotesk">Электросамокаты</span>
+                                <span class="text-xl font-bold">500₽ / час</span>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- Галерея (Симметричное расположение) -->
+        <section class="py-24 px-6 bg-zinc-50">
+            <div class="max-w-7xl mx-auto">
+                <h2 class="text-6xl font-black grotesk uppercase mb-16 text-center">Наша техника</h2>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <!-- Скутеры -->
+                    <div class="bg-zinc-200 rounded-3xl overflow-hidden relative group aspect-[4/5] sm:aspect-square lg:aspect-[3/4]">
+                      src="bicycle-sudak-arenda.webp"
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+                        <div class="absolute bottom-6 left-6 text-white">
+                            <p class="grotesk font-black text-2xl uppercase">Скутеры</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Велосипеды -->
+                    <div onclick="switchView('bikes')" class="bg-zinc-200 rounded-3xl overflow-hidden group relative cursor-pointer aspect-[4/5] sm:aspect-square lg:aspect-[3/4]">
+                          src="bicycle-sudak-arenda.webp"
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+                        <div class="absolute bottom-6 left-6 text-white">
+                            <p class="grotesk font-black text-2xl uppercase leading-none">Велосипеды</p>
+                            <p class="text-[10px] uppercase tracking-widest mt-2 opacity-80 font-bold">Каталог →</p>
+                        </div>
+                    </div>
+
+                    <!-- SUP -->
+                    <div class="bg-zinc-300 rounded-3xl overflow-hidden group relative aspect-[4/5] sm:aspect-square lg:aspect-[3/4]">
+                        src="surfboard__sudak_prokat.webp"
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+                        <div class="absolute bottom-6 left-6 text-white">
+                            <p class="grotesk font-black text-2xl uppercase">SUP-борды</p>
+                        </div>
+                    </div>
+
+                    <!-- Электросамокаты -->
+                    <div class="bg-zinc-300 rounded-3xl overflow-hidden group relative aspect-[4/5] sm:aspect-square lg:aspect-[3/4]">
+                        src="electric-scooter-procat.webp"
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+                        <div class="absolute bottom-6 left-6 text-white font-black text-2xl uppercase">Самокаты</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEO Текст Главная -->
+        <section class="py-24 px-6 bg-white">
+            <div class="max-w-4xl mx-auto seo-section text-center md:text-left">
+                <h2 class="text-4xl font-black grotesk uppercase mb-8">Прокат техники в Судаке: Скутеры, Велосипеды, Сапборды</h2>
+                <p>Добро пожаловать в <strong>Прокат Судак</strong> на сезон 2026! Мы предлагаем лучший выбор техники для активного отдыха в Крыму. Наш пункт проката удобно расположен по адресу <em>ул. Юбилейная 3/4</em>, откуда легко добраться до набережной или отправиться в сторону Нового Света.</p>
+                <p>В нашем парке только исправная и обслуженная техника: маневренные скутеры для поездок на Меганом, горные велосипеды для покорения троп Алчака и современные сапборды для морских прогулок у Генуэзской крепости. Выбирайте свободу передвижения вместе с нами!</p>
+            </div>
+        </section>
+    </div>
+
+    <!-- РАЗДЕЛ ВЕЛОСИПЕДЫ -->
+    <div id="view-bikes" class="view-section hidden-view">
+        <main class="pt-32 pb-24 px-6 max-w-7xl mx-auto">
+            <nav class="mb-12 flex items-center justify-between">
+                <div class="flex items-center gap-4 text-xs font-bold uppercase tracking-widest text-zinc-400">
+                    <a href="javascript:void(0)" onclick="switchView('home')" class="hover:text-black">Главная</a>
+                    <span>/</span>
+                    <span class="text-black">Велосипеды</span>
+                </div>
+                <button onclick="switchView('home')" class="flex items-center gap-2 text-xs font-bold uppercase bg-zinc-100 px-6 py-3 rounded-full hover:bg-black hover:text-white transition-all">
+                    <i data-lucide="arrow-left" class="w-4 h-4"></i> Назад
+                </button>
+            </nav>
+
+            <h1 class="text-huge font-black grotesk uppercase mb-16">Каталог Вело 2026</h1>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-32">
+                <article class="flex flex-col gap-6">
+                    <div class="aspect-[3/4] rounded-3xl overflow-hidden bg-zinc-100">
+                        <img src="https://images.unsplash.com/photo-1485965120184-e220f721d03e?auto=format&fit=crop&q=80&w=600" class="w-full h-full object-cover" alt="Велосипед 26 дюймов">
+                    </div>
+                    <div>
+                        <h2 class="text-2xl font-black grotesk uppercase mb-2">Standard 26"</h2>
+                        <p class="text-sm text-zinc-500 mb-4 tracking-tight">Для прогулок по городу. Колеса 26", рост 165-175 см.</p>
+                        <p class="text-xl font-bold text-blue-600">200₽ / час</p>
+                    </div>
+                </article>
+
+                <article class="flex flex-col gap-6">
+                    <div class="aspect-[3/4] rounded-3xl overflow-hidden bg-zinc-100">
+                        <img src="https://images.unsplash.com/photo-1576435728678-68d0fbf94e91?auto=format&fit=crop&q=80&w=600" class="w-full h-full object-cover" alt="Велосипед 27.5 дюймов">
+                    </div>
+                    <div>
+                        <h2 class="text-2xl font-black grotesk uppercase mb-2">Mountain 27.5"</h2>
+                        <p class="text-sm text-zinc-500 mb-4 tracking-tight">Горный MTB для троп Судака. Рост 175-185 см.</p>
+                        <p class="text-xl font-bold text-blue-600">250₽ / час</p>
+                    </div>
+                </article>
+
+                <article class="flex flex-col gap-6">
+                    <div class="aspect-[3/4] rounded-3xl overflow-hidden bg-zinc-100">
+                        <img src="https://images.unsplash.com/photo-1532298229144-0ee0c97d158b?auto=format&fit=crop&q=80&w=600" class="w-full h-full object-cover" alt="Велосипед 29 дюймов">
+                    </div>
+                    <div>
+                        <h2 class="text-2xl font-black grotesk uppercase mb-2">Big Wheel 29"</h2>
+                        <p class="text-sm text-zinc-500 mb-4 tracking-tight">Найнер с отличным накатом. Колеса 29", рост от 185 см.</p>
+                        <p class="text-xl font-bold text-blue-600">300₽ / час</p>
+                    </div>
+                </article>
+
+                <article class="flex flex-col gap-6">
+                    <div class="aspect-[3/4] rounded-3xl overflow-hidden bg-blue-50 border border-blue-100">
+                        <img src="https://images.unsplash.com/photo-1593450974665-985c57b7f941?auto=format&fit=crop&q=80&w=600" class="w-full h-full object-cover" alt="Детский велосипед">
+                    </div>
+                    <div>
+                        <h2 class="text-2xl font-black grotesk uppercase mb-2 text-blue-600">Junior Kids</h2>
+                        <p class="text-sm text-zinc-500 mb-4 tracking-tight">Для юных райдеров в Судаке. Рост до 160 см.</p>
+                        <p class="text-xl font-bold text-blue-600">150₽ / час</p>
+                    </div>
+                </article>
+            </div>
+
+            <!-- FAQ Велосипеды -->
+            <section class="max-w-3xl mb-32 seo-section">
+                <h2 class="text-4xl font-black grotesk uppercase mb-12">Условия проката велосипедов 2026</h2>
+                <div class="space-y-2">
+                    <div class="faq-item">
+                        <div class="faq-question" onclick="toggleFaq(this)">
+                            <h3 class="text-lg font-bold uppercase tracking-tighter">Какой залог за велосипед?</h3>
+                            <i data-lucide="plus" class="faq-icon"></i>
+                        </div>
+                        <div class="faq-answer">Денежный залог составляет 2000₽ за велосипед, либо вы можете оставить документ (права, СТС). Паспорт РФ в залог не принимается, только для оформления договора.</div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question" onclick="toggleFaq(this)">
+                            <h3 class="text-lg font-bold uppercase tracking-tighter">Выдаете ли вы замки и шлемы?</h3>
+                            <i data-lucide="plus" class="faq-icon"></i>
+                        </div>
+                        <div class="faq-answer">Да, каждому клиенту мы бесплатно выдаем надежный противоугонный замок. Защитные шлемы предоставляются по запросу.</div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- ОБЩИЕ КОНТАКТЫ -->
+    <section id="contacts" class="py-24 px-6 bg-zinc-50 border-t border-zinc-200">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16">
+            <div class="space-y-12">
+                <h2 class="text-6xl font-black grotesk uppercase">Контакты</h2>
+                <div class="space-y-6 text-center md:text-left">
+                    <div>
+                        <p class="text-zinc-500 uppercase tracking-widest text-xs font-bold mb-2">Наш адрес</p>
+                        <p class="text-3xl font-bold grotesk">г. Судак, ул. Юбилейная 3/4</p>
+                    </div>
+                    <div>
+                        <p class="text-zinc-500 uppercase tracking-widest text-xs font-bold mb-2">Бронирование 2026</p>
+                        <a href="tel:+79785306550" class="text-3xl font-bold grotesk hover:text-blue-600 transition-colors tracking-tight">+7 (978) 530-65-50</a>
+                    </div>
+                </div>
+                <div class="flex justify-center md:justify-start">
+                    <a href="https://yandex.ru/maps/?rtext=~44.851603,34.974558" target="_blank" class="inline-flex items-center gap-4 bg-black text-white px-10 py-5 rounded-2xl hover:bg-zinc-800 transition-all">
+                        <i data-lucide="map-pin"></i>
+                        <span class="font-bold grotesk uppercase tracking-tighter">Маршрут в Яндекс Картах</span>
+                    </a>
+                </div>
+            </div>
+            <div class="h-[450px] rounded-3xl overflow-hidden shadow-2xl grayscale hover:grayscale-0 transition-all duration-700">
+                <iframe src="https://yandex.ru/map-widget/v1/?ll=34.974558%2C44.851603&z=17" width="100%" height="100%" frameborder="0"></iframe>
+            </div>
+        </div>
+    </section>
+
+    <!-- Футер -->
+    <footer class="py-12 px-6 bg-white text-center border-t border-zinc-100">
+        <p class="grotesk font-bold text-zinc-400 text-sm uppercase tracking-widest">© 2026 Прокат Судак — Крым. Все права защищены.</p>
+        <div class="mt-4 text-[10px] text-zinc-300 uppercase tracking-widest">
+            Разработка сайта: <a href="#" class="hover:text-blue-600 underline transition-colors">Digital Studio</a>
+        </div>
+    </footer>
+
+    <script>
+        lucide.createIcons();
+
+        function switchView(viewId) {
+            const home = document.getElementById('view-home');
+            const bikes = document.getElementById('view-bikes');
+
+            if (viewId === 'bikes') {
+                home.classList.add('hidden-view');
+                bikes.classList.remove('hidden-view');
+                setTimeout(() => { bikes.style.opacity = '1'; }, 50);
+            } else {
+                bikes.classList.add('hidden-view');
+                home.classList.remove('hidden-view');
+                setTimeout(() => { home.style.opacity = '1'; }, 50);
+            }
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function toggleFaq(element) {
+            const item = element.parentElement;
+            item.classList.toggle('active');
+        }
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('opacity-100');
+                    entry.target.classList.remove('translate-y-10');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('section, article').forEach(el => {
+            el.classList.add('transition-all', 'duration-700', 'opacity-0', 'translate-y-10');
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Прокат скутеров, велосипедов и сапбордов в Судаке | Аренда техники 2026</title>
     
     <!-- SEO Meta Tags -->
@@ -331,6 +685,7 @@
     </script>
 </body>
 </html>
+
 
 
 
