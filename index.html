@@ -346,84 +346,64 @@
         </div>
     </footer>
 
-    <script>
-        lucide.createIcons();
-<script>
+   <script>
+        // Инициализация Lucide
         lucide.createIcons();
 
-        // Бургер меню
-        function toggleMenu() {
-            const menu = document.getElementById('mobile-menu-overlay');
-            menu.classList.toggle('open');
-            document.body.style.overflow = menu.classList.contains('open') ? 'hidden' : '';
+        // Логика переключения
+        function switchView(viewId) {
+            const views = ['home', 'bikes', 'scooters', 'e-scooters', 'sup'];
+            views.forEach(v => {
+                const el = document.getElementById('view-' + v);
+                if (el) el.classList.add('hidden-view');
+            });
+
+            const targetView = document.getElementById('view-' + viewId);
+            if (targetView) {
+                targetView.classList.remove('hidden-view');
+                // Маленький хак для анимации иконок в скрытых блоках
+                setTimeout(() => { lucide.createIcons(); }, 10);
+            }
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        // Навигация через мобильное меню
+        // Мобильное меню
+        function toggleMenu() {
+            document.getElementById('mobile-menu-overlay').classList.toggle('open');
+        }
+
         function menuNavigate(viewId, anchor = null) {
             toggleMenu();
             switchView(viewId);
             if (anchor) {
                 setTimeout(() => {
-                    const el = document.querySelector(anchor);
-                    if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    document.querySelector(anchor).scrollIntoView({ behavior: 'smooth' });
                 }, 100);
-            } else if (viewId === 'scooters') {
-                scrollToSection('#item-scooters');
-            } else if (viewId === 'e-scooters') {
-                scrollToSection('#item-e-scooters');
-            } else if (viewId === 'sup') {
-                scrollToSection('#item-sup');
             }
         }
 
-        function scrollToSection(id) {
-            setTimeout(() => {
-                const el = document.querySelector(id);
-                if (el) el.scrollIntoView({ behavior: 'smooth', block: 'center' });
-            }, 400);
+        function toggleFaq(el) {
+            el.parentElement.classList.toggle('active');
         }
 
-        // Основное переключение страниц
-        function switchView(viewId) {
-            const home = document.getElementById('view-home');
-            const bikes = document.getElementById('view-bikes');
-
-            if (viewId === 'bikes') {
-                home.classList.add('hidden-view');
-                bikes.classList.remove('hidden-view');
-                setTimeout(() => { bikes.style.opacity = '1'; }, 50);
-            } else {
-                bikes.classList.add('hidden-view');
-                home.classList.remove('hidden-view');
-                setTimeout(() => { home.style.opacity = '1'; }, 50);
-            }
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
-
-        function toggleFaq(element) {
-            element.parentElement.classList.toggle('active');
-        }
-
+        // Плавное появление
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     entry.target.classList.add('opacity-100');
-                    entry.target.classList.remove('translate-y-10');
+                    entry.target.style.transform = 'translateY(0)';
                 }
             });
         }, { threshold: 0.1 });
 
         document.querySelectorAll('section, article').forEach(el => {
-            el.classList.add('transition-all', 'duration-700', 'opacity-0', 'translate-y-10');
+            el.style.transform = 'translateY(20px)';
+            el.classList.add('transition-all', 'duration-700', 'opacity-0');
             observer.observe(el);
         });
     </script>
 </body>
 </html>
-
-
-
-
 
 
 
