@@ -348,7 +348,42 @@
 
     <script>
         lucide.createIcons();
+<script>
+        lucide.createIcons();
 
+        // Бургер меню
+        function toggleMenu() {
+            const menu = document.getElementById('mobile-menu-overlay');
+            menu.classList.toggle('open');
+            document.body.style.overflow = menu.classList.contains('open') ? 'hidden' : '';
+        }
+
+        // Навигация через мобильное меню
+        function menuNavigate(viewId, anchor = null) {
+            toggleMenu();
+            switchView(viewId);
+            if (anchor) {
+                setTimeout(() => {
+                    const el = document.querySelector(anchor);
+                    if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }, 100);
+            } else if (viewId === 'scooters') {
+                scrollToSection('#item-scooters');
+            } else if (viewId === 'e-scooters') {
+                scrollToSection('#item-e-scooters');
+            } else if (viewId === 'sup') {
+                scrollToSection('#item-sup');
+            }
+        }
+
+        function scrollToSection(id) {
+            setTimeout(() => {
+                const el = document.querySelector(id);
+                if (el) el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }, 400);
+        }
+
+        // Основное переключение страниц
         function switchView(viewId) {
             const home = document.getElementById('view-home');
             const bikes = document.getElementById('view-bikes');
@@ -366,8 +401,7 @@
         }
 
         function toggleFaq(element) {
-            const item = element.parentElement;
-            item.classList.toggle('active');
+            element.parentElement.classList.toggle('active');
         }
 
         const observer = new IntersectionObserver((entries) => {
