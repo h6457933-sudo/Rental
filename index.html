@@ -67,7 +67,37 @@
     <a href="https://t.me/your_telegram_link" target="_blank" class="tg-float" title="Написать в Telegram">
         <i data-lucide="send"></i>
     </a>
-
+    
+<!-- Мобильное меню (Overlay) -->
+    <div id="mobile-menu-overlay" class="fixed inset-0 z-[100] bg-white flex flex-col p-8 overflow-y-auto">
+        <div class="flex justify-between items-center mb-12">
+            <span class="grotesk font-bold text-xl uppercase tracking-tighter">Навигация</span>
+            <button onclick="toggleMenu()" class="p-2 bg-zinc-100 rounded-full">
+                <i data-lucide="x"></i>
+            </button>
+        </div>
+        <div class="flex flex-col gap-6">
+            <a href="javascript:void(0)" onclick="menuNavigate('home')" class="grotesk text-4xl font-black uppercase hover:text-blue-600 transition-colors">Главная</a>
+            
+            <div class="h-[1px] bg-zinc-100 my-2"></div>
+            
+            <span class="text-[10px] uppercase tracking-widest text-zinc-400 font-bold">Транспорт</span>
+            <a href="javascript:void(0)" onclick="menuNavigate('bikes')" class="grotesk text-3xl font-black uppercase hover:text-blue-600 transition-colors">Велосипеды</a>
+            <a href="javascript:void(0)" onclick="menuNavigate('scooters')" class="grotesk text-3xl font-black uppercase hover:text-blue-600 transition-colors">Скутеры</a>
+            <a href="javascript:void(0)" onclick="menuNavigate('e-scooters')" class="grotesk text-3xl font-black uppercase hover:text-blue-600 transition-colors">Электросамокаты</a>
+            <a href="javascript:void(0)" onclick="menuNavigate('sup')" class="grotesk text-3xl font-black uppercase hover:text-blue-600 transition-colors">Сапборды</a>
+            
+            <div class="h-[1px] bg-zinc-100 my-2"></div>
+            
+            <a href="javascript:void(0)" onclick="menuNavigate('home', '#prices')" class="grotesk text-4xl font-black uppercase hover:text-blue-600 transition-colors">Цены</a>
+            <a href="javascript:void(0)" onclick="menuNavigate('home', '#contacts')" class="grotesk text-4xl font-black uppercase hover:text-blue-600 transition-colors">Контакты</a>
+        </div>
+        <div class="mt-auto pt-12 text-center md:text-left">
+            <p class="text-xs uppercase tracking-widest text-zinc-400 font-bold mb-4">Связаться с нами</p>
+            <a href="tel:+79785306550" class="text-xl font-bold tracking-tighter">+7 (978) 530-65-50</a>
+        </div>
+    </div>
+    
     <!-- Общая навигация -->
     <nav class="fixed top-0 w-full z-50 mix-blend-difference text-white p-6 flex justify-between items-center">
         <a href="javascript:void(0)" onclick="switchView('home')" class="grotesk font-bold text-2xl tracking-tighter uppercase">
@@ -352,6 +382,7 @@
     </script>
 </body>
 </html>
+
 
 
 
