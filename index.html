@@ -3,17 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Прокат скутеров и велосипедов в Судаке | Аренда 2026</title>
+    <title>Прокат Судак 2026 — Скутеры, Велосипеды, SUP и Самокаты | АРТ Таврида</title>
     
     <!-- SEO Meta Tags -->
-    <meta name="description" content="Аренда скутеров, велосипедов и сапбордов в Судаке. Низкие цены, исправная техника, удобное расположение на сезон 2026.">
-    <meta name="keywords" content="прокат скутеров судак 2026, аренда велосипедов судак, электросамокаты судак цена, сапборды судак">
+    <meta name="description" content="Аренда скутеров Vento, горных велосипедов и SUP-бордов в Судаке 2026. Маршруты на Меганом и Новый Свет. Лучшие цены на Юбилейной 3/4.">
+    <meta name="keywords" content="прокат скутеров судак, аренда велосипедов судак, арт таврида транспорт, VMC Vento Retro, Vento Smart 3, сапборды судак, маршруты крым">
     
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700;900&family=Space+Grotesk:wght@300;500;700&display=swap" rel="stylesheet">
     <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    
     <style>
         :root {
             --accent: #0066FF;
@@ -26,9 +28,7 @@
             color: var(--dark);
             scroll-behavior: smooth;
         }
-        .grotesk {
-            font-family: 'Space Grotesk', sans-serif;
-        }
+        .grotesk { font-family: 'Space Grotesk', sans-serif; }
         .text-huge {
             font-size: clamp(3rem, 15vw, 12rem);
             line-height: 0.85;
@@ -48,364 +48,418 @@
         }
         .tg-float:hover { transform: scale(1.1) rotate(10deg); }
         
+        /* FAQ Logic */
         .faq-item { border-bottom: 1px solid #e5e7eb; }
-        .faq-question { cursor: pointer; padding: 1.5rem 0; display: flex; justify-content: space-between; align-items: center; }
-        .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.4s ease-out; color: #4b5563; }
-        .faq-item.active .faq-answer { max-height: 300px; padding-bottom: 1.5rem; }
+        .faq-question { cursor: pointer; padding: 1.5rem 0; display: flex; justify-content: space-between; align-items: center; text-align: left; }
+        .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.4s ease-out, padding 0.3s ease; color: #4b5563; }
+        .faq-item.active .faq-answer { max-height: 500px; padding-bottom: 1.5rem; }
         .faq-item.active .faq-icon { transform: rotate(45deg); }
         .faq-icon { transition: transform 0.3s ease; }
 
-        .view-section { transition: opacity 0.4s ease; }
-        .hidden-view { display: none; opacity: 0; }
+        .view-section { transition: opacity 0.4s ease; opacity: 1; }
+        .hidden-view { display: none !important; opacity: 0; }
         
-        .seo-section p { margin-bottom: 1.5rem; line-height: 1.8; color: #374151; }
+        .seo-section { max-width: 64rem; margin: 0 auto; padding: 4rem 1.5rem; }
+        .seo-section h2 { font-size: 2.25rem; font-weight: 900; text-transform: uppercase; margin-bottom: 1.5rem; font-family: 'Space Grotesk'; color: var(--dark); }
+        .seo-section h3 { font-size: 1.5rem; font-weight: 700; margin-top: 2rem; margin-bottom: 1rem; color: var(--accent); }
+        .seo-section p { margin-bottom: 1.2rem; line-height: 1.8; color: #374151; font-size: 1.1rem; }
+
+        .review-card {
+            background: white;
+            border-radius: 1.5rem;
+            padding: 2rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid #f0f0f0;
+        }
+        .review-card:hover { transform: translateY(-5px); box-shadow: 0 20px 40px rgba(0,0,0,0.05); }
+
+        .route-card { border-radius: 2rem; background: white; overflow: hidden; border: 1px solid #eee; transition: transform 0.3s ease; display: flex; flex-direction: column; height: 100%; }
+        .route-card:hover { transform: translateY(-10px); }
+        .route-map-overlay { position: relative; height: 160px; background: #f0f0f0; overflow: hidden; margin-top: auto; border-radius: 1rem; margin: 1rem; }
+        
+        #mobile-menu-overlay { transition: transform 0.5s cubic-bezier(0.77,0.2,0.05,1.0); transform: translateY(-100%); }
+        #mobile-menu-overlay.open { transform: translateY(0); }
+
+        .inner-gallery div { border-radius: 1.5rem; overflow: hidden; height: 250px; }
+        .inner-gallery img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease; }
+        .inner-gallery div:hover img { transform: scale(1.05); }
+
+        .price-tag { background: var(--accent); color: white; padding: 4px 12px; border-radius: 99px; font-weight: 700; font-size: 0.875rem; }
+
+        /* 3D Sun Effect */
+        #sun-canvas-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            pointer-events: none;
+            background: linear-gradient(to bottom, #f0f4f8 0%, #ffffff 100%);
+        }
+        .hero-content { position: relative; z-index: 10; }
+        
+        .product-card { background: white; border-radius: 2.5rem; padding: 2rem; border: 1px solid #eee; height: 100%; }
+        .spec-label { font-size: 0.7rem; font-weight: 800; text-transform: uppercase; color: #999; letter-spacing: 0.1em; }
+        .spec-value { font-size: 1rem; font-weight: 700; color: #121212; }
     </style>
 </head>
 <body class="overflow-x-hidden">
 
-    <!-- Кнопка Telegram -->
+    <!-- Telegram -->
     <a href="https://t.me/your_telegram_link" target="_blank" class="tg-float" title="Написать в Telegram">
         <i data-lucide="send"></i>
     </a>
-    
-<!-- Мобильное меню (Overlay) -->
+
+    <!-- Mobile Menu -->
     <div id="mobile-menu-overlay" class="fixed inset-0 z-[100] bg-white flex flex-col p-8 overflow-y-auto">
         <div class="flex justify-between items-center mb-12">
-            <span class="grotesk font-bold text-xl uppercase tracking-tighter">Навигация</span>
-            <button onclick="toggleMenu()" class="p-2 bg-zinc-100 rounded-full">
-                <i data-lucide="x"></i>
-            </button>
+            <span class="grotesk font-bold text-xl uppercase text-black">Меню проката</span>
+            <button onclick="toggleMenu()" class="p-2 bg-zinc-100 rounded-full"><i data-lucide="x"></i></button>
         </div>
-        <div class="flex flex-col gap-6">
-            <a href="javascript:void(0)" onclick="menuNavigate('home')" class="grotesk text-4xl font-black uppercase hover:text-blue-600 transition-colors">Главная</a>
-            
+        <nav class="flex flex-col gap-6 text-black text-center md:text-left">
+            <a href="javascript:void(0)" onclick="menuNavigate('home')" class="grotesk text-4xl font-black uppercase">Главная</a>
             <div class="h-[1px] bg-zinc-100 my-2"></div>
-            
-            <span class="text-[10px] uppercase tracking-widest text-zinc-400 font-bold">Транспорт</span>
-            <a href="javascript:void(0)" onclick="menuNavigate('bikes')" class="grotesk text-3xl font-black uppercase hover:text-blue-600 transition-colors">Велосипеды</a>
-            <a href="javascript:void(0)" onclick="menuNavigate('scooters')" class="grotesk text-3xl font-black uppercase hover:text-blue-600 transition-colors">Скутеры</a>
-            <a href="javascript:void(0)" onclick="menuNavigate('e-scooters')" class="grotesk text-3xl font-black uppercase hover:text-blue-600 transition-colors">Электросамокаты</a>
-            <a href="javascript:void(0)" onclick="menuNavigate('sup')" class="grotesk text-3xl font-black uppercase hover:text-blue-600 transition-colors">Сапборды</a>
-            
+            <a href="javascript:void(0)" onclick="menuNavigate('bikes')" class="grotesk text-3xl font-black uppercase">Велосипеды</a>
+            <a href="javascript:void(0)" onclick="menuNavigate('scooters')" class="grotesk text-3xl font-black uppercase">Скутеры</a>
+            <a href="javascript:void(0)" onclick="menuNavigate('e-scooters')" class="grotesk text-3xl font-black uppercase">Самокаты</a>
+            <a href="javascript:void(0)" onclick="menuNavigate('sup')" class="grotesk text-3xl font-black uppercase">Сапборды</a>
             <div class="h-[1px] bg-zinc-100 my-2"></div>
-            
-            <a href="javascript:void(0)" onclick="menuNavigate('home', '#prices')" class="grotesk text-4xl font-black uppercase hover:text-blue-600 transition-colors">Цены</a>
-            <a href="javascript:void(0)" onclick="menuNavigate('home', '#contacts')" class="grotesk text-4xl font-black uppercase hover:text-blue-600 transition-colors">Контакты</a>
-        </div>
-        <div class="mt-auto pt-12 text-center md:text-left">
-            <p class="text-xs uppercase tracking-widest text-zinc-400 font-bold mb-4">Связаться с нами</p>
-            <a href="tel:+79785306550" class="text-xl font-bold tracking-tighter">+7 (978) 530-65-50</a>
-        </div>
+            <a href="javascript:void(0)" onclick="menuNavigate('home', '#reviews-section')" class="grotesk text-4xl font-black uppercase">Отзывы</a>
+            <a href="javascript:void(0)" onclick="menuNavigate('home', '#contacts')" class="grotesk text-4xl font-black uppercase">Контакты</a>
+        </nav>
     </div>
-    
-    <!-- Общая навигация -->
+
+    <!-- Universal Header -->
     <nav class="fixed top-0 w-full z-50 mix-blend-difference text-white p-6 flex justify-between items-center">
-        <a href="javascript:void(0)" onclick="switchView('home')" class="grotesk font-bold text-2xl tracking-tighter uppercase">
-            Судак / Прокат
-        </a>
+        <a href="javascript:void(0)" onclick="switchView('home')" class="grotesk font-bold text-2xl tracking-tighter uppercase">Судак / Прокат</a>
         <div class="hidden md:flex gap-8 uppercase text-xs font-bold tracking-widest">
             <a href="javascript:void(0)" onclick="switchView('home')" class="hover:opacity-50">Главная</a>
-            <a href="javascript:void(0)" onclick="switchView('bikes')" class="hover:opacity-50">Велосипеды</a>
-            <a href="#prices" class="hover:opacity-50">Цены</a>
-            <a href="#contacts" class="hover:opacity-50">Контакты</a>
+            <a href="javascript:void(0)" onclick="switchView('bikes')" class="hover:opacity-50">Вело</a>
+            <a href="javascript:void(0)" onclick="switchView('scooters')" class="hover:opacity-50">Скутеры</a>
+            <a href="javascript:void(0)" onclick="switchView('e-scooters')" class="hover:opacity-50">Самокаты</a>
+            <a href="javascript:void(0)" onclick="switchView('sup')" class="hover:opacity-50">SUP</a>
         </div>
-        <div class="md:hidden">
-            <i data-lucide="menu"></i>
-        </div>
-         <!-- Бургер (Мобильный) -->
-        <div class="md:hidden cursor-pointer" onclick="toggleMenu()">
-            <i data-lucide="menu"></i>
-        </div>
-      </nav>
+        <div class="md:hidden cursor-pointer" onclick="toggleMenu()"><i data-lucide="menu"></i></div>
+    </nav>
 
-    <!-- ГЛАВНАЯ СТРАНИЦА -->
+    <!-- MAIN VIEW -->
     <div id="view-home" class="view-section">
-        <header class="min-h-screen flex flex-col justify-end p-6 pb-20 relative bg-white">
-            <div class="absolute top-20 right-6 opacity-10 hidden lg:block">
-                <p class="text-huge font-black grotesk uppercase leading-none">Velo<br>bike</p>
-            </div>
-            <h1 class="text-huge font-black grotesk uppercase mb-8">Прокат<br>Судак</h1>
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 items-end">
-                <div>
-                    <p class="max-w-xs text-lg font-light leading-snug text-zinc-600">
-                        Скутеры, электросамокаты, велосипеды и сапборды для ваших лучших прогулок по побережью Крыма в сезоне 2026.
-                    </p>
+        <header class="min-h-screen flex flex-col justify-end p-6 pb-20 relative bg-white overflow-hidden">
+            <div id="sun-canvas-container"></div>
+            <div class="hero-content">
+                <div class="absolute top-20 right-6 opacity-10 hidden lg:block text-right text-zinc-900">
+                    <p class="text-huge font-black grotesk uppercase leading-none">EXPLORE<br>SUDAK</p>
                 </div>
-                <div class="flex flex-col gap-4">
-                    <div class="flex items-center gap-2">
-                        <span class="w-12 h-[1px] bg-black"></span>
-                        <address class="not-italic text-xs font-bold uppercase tracking-widest">ул. Юбилейная 3/4</address>
+                <h1 class="text-huge font-black grotesk uppercase mb-8 mix-blend-multiply text-black">Прокат<br>Судак</h1>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 items-end text-black">
+                    <p class="max-w-xs text-lg font-light">Транспорт для яркого отдыха и исследования Крыма в сезоне 2026. Маршруты на любой вкус.</p>
+                    <div>
+                        <address class="not-italic text-xs font-bold uppercase mb-2">ул. Юбилейная 3/4</address>
+                        <a href="tel:+79785306550" class="text-2xl font-bold">+7 (978) 530-65-50</a>
                     </div>
-                    <a href="tel:+79785306550" class="text-2xl font-bold">+7 (978) 530-65-50</a>
-                </div>
-                <div class="flex justify-start md:justify-end">
-                    <a href="#prices" class="bg-black text-white px-8 py-4 rounded-full grotesk font-bold hover:bg-blue-600 transition-colors uppercase tracking-tight">Цены 2026</a>
+                    <div class="flex lg:justify-end">
+                        <a href="#gallery-main" class="bg-black text-white px-8 py-4 rounded-full font-bold uppercase text-sm hover:bg-blue-600 transition-colors">Смотреть каталог</a>
+                    </div>
                 </div>
             </div>
         </header>
 
-        <!-- Секция Цен -->
-        <section id="prices" class="py-24 px-6 bg-[#121212] text-white">
-            <div class="flex flex-col md:flex-row gap-12 max-w-7xl mx-auto">
-                <div class="md:w-1/4">
-                    <h2 class="text-5xl font-black grotesk uppercase sticky top-24">Прайс<br>2026</h2>
+        <!-- Category Grid -->
+        <section id="gallery-main" class="py-24 px-6 bg-zinc-50">
+            <div class="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 text-black text-center">
+                <div onclick="switchView('scooters')" class="bg-zinc-200 rounded-3xl overflow-hidden relative group aspect-[3/4] cursor-pointer">
+                    <img src="https://images.unsplash.com/photo-1595304192723-9366113b9409?auto=format&fit=crop&q=80&w=800" class="w-full h-full object-cover">
+                    <div class="absolute inset-0 bg-black/30 group-hover:bg-black/10 transition-all"></div>
+                    <div class="absolute bottom-6 left-6 text-white text-left"><p class="grotesk font-black text-2xl uppercase leading-none">Скутеры</p></div>
                 </div>
-                <div class="md:w-3/4 space-y-12">
-                    <article>
-                        <h3 class="text-blue-500 text-xs font-bold uppercase tracking-[0.3em] mb-6">01 / Техника</h3>
-                        <div class="space-y-4">
-                            <div class="flex justify-between items-end border-b border-zinc-800 pb-4">
-                                <span class="text-2xl grotesk">Скутеры (150cc - 170cc)</span>
-                                <span class="text-xl font-bold">от 1500₽ / сут.</span>
-                            </div>
-                            <div class="flex justify-between items-end border-b border-zinc-800 pb-4">
-                                <span class="text-2xl grotesk">Велосипеды (горные/городские)</span>
-                                <span class="text-xl font-bold text-blue-400">от 500₽ / час</span>
-                            </div>
-                            <div class="flex justify-between items-end border-b border-zinc-800 pb-4">
-                                <span class="text-2xl grotesk">Электросамокаты</span>
-                                <span class="text-xl font-bold">500₽ / час</span>
-                            </div>
-                        </div>
-                    </article>
+                <div onclick="switchView('bikes')" class="bg-zinc-200 rounded-3xl overflow-hidden relative group aspect-[3/4] cursor-pointer">
+                    <img src="https://images.unsplash.com/photo-1532298229144-0ee0c97d158b?auto=format&fit=crop&q=80&w=800" class="w-full h-full object-cover">
+                    <div class="absolute inset-0 bg-black/30 group-hover:bg-black/10 transition-all"></div>
+                    <div class="absolute bottom-6 left-6 text-white text-left"><p class="grotesk font-black text-2xl uppercase leading-none">Велосипеды</p></div>
+                </div>
+                <div onclick="switchView('sup')" class="bg-zinc-300 rounded-3xl overflow-hidden group relative aspect-[3/4] cursor-pointer">
+                    <img src="https://images.unsplash.com/photo-1623079360394-84820894762c?auto=format&fit=crop&q=80&w=800" class="w-full h-full object-cover">
+                    <div class="absolute inset-0 bg-black/30 group-hover:bg-black/10 transition-all"></div>
+                    <div class="absolute bottom-6 left-6 text-white text-left"><p class="grotesk font-black text-2xl uppercase leading-none">Сапборды</p></div>
+                </div>
+                <div onclick="switchView('e-scooters')" class="bg-zinc-300 rounded-3xl overflow-hidden group relative aspect-[3/4] cursor-pointer">
+                    <img src="https://images.unsplash.com/photo-1605333145446-09f4d173c66f?auto=format&fit=crop&q=80&w=800" class="w-full h-full object-cover">
+                    <div class="absolute inset-0 bg-black/30 group-hover:bg-black/10 transition-all"></div>
+                    <div class="absolute bottom-6 left-6 text-white text-left"><p class="grotesk font-black text-2xl uppercase leading-none">Самокаты</p></div>
                 </div>
             </div>
         </section>
 
-        <!-- Галерея (Симметричное расположение) -->
-        <section class="py-24 px-6 bg-zinc-50">
+        <!-- REVIEWS -->
+        <section id="reviews-section" class="py-24 px-6 bg-white text-black">
             <div class="max-w-7xl mx-auto">
-                <h2 class="text-6xl font-black grotesk uppercase mb-16 text-center">Наша техника</h2>
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                    <!-- Скутеры -->
-                    <div class="bg-zinc-200 rounded-3xl overflow-hidden relative group aspect-[4/5] sm:aspect-square lg:aspect-[3/4]">
-                      <src="bicycle_sudak_arenda.webp" class="w-full h-full object-cover" alt="скутер арена Судак">
-                        <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
-                        <div class="absolute bottom-6 left-6 text-white">
-                            <p class="grotesk font-black text-2xl uppercase">Скутеры</p>
+                <div class="flex flex-col md:flex-row justify-between items-center mb-16 gap-6">
+                    <div>
+                        <h2 class="text-5xl font-black grotesk uppercase mb-2">Отзывы</h2>
+                        <div class="flex items-center gap-2 text-zinc-400 font-bold uppercase text-[10px]">
+                            <img src="https://yastatic.net/s3/home/services/block/maps_new.svg" class="w-6 h-6" alt="Яндекс">
+                            Рейтинг 5.0 на Яндекс Картах
                         </div>
                     </div>
-                    
-                    <!-- Велосипеды -->
-                    <div onclick="switchView('bikes')" class="bg-zinc-200 rounded-3xl overflow-hidden group relative cursor-pointer aspect-[4/5] sm:aspect-square lg:aspect-[3/4]">
-                           <src="bicycle_sudak_arenda.webp" class="w-full h-full object-cover" alt="прокат велосипедов Судак">
-                        <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
-                        <div class="absolute bottom-6 left-6 text-white">
-                            <p class="grotesk font-black text-2xl uppercase leading-none">Велосипеды</p>
-                            <p class="text-[10px] uppercase tracking-widest mt-2 opacity-80 font-bold">Каталог →</p>
+                    <a href="https://yandex.ru/maps/org/prokat_sudak/" target="_blank" class="bg-yellow-400 text-black px-8 py-4 rounded-2xl font-bold uppercase text-xs hover:bg-yellow-500 flex items-center gap-2">Написать отзыв <i data-lucide="external-link" class="w-4 h-4"></i></a>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div class="review-card">
+                        <div class="flex gap-3 items-center mb-4 text-xs">
+                            <div class="w-10 h-10 bg-zinc-100 rounded-full flex items-center justify-center font-bold">АМ</div>
+                            <div><p class="font-bold">Алексей М.</p><p class="text-zinc-400">2 недели назад</p></div>
                         </div>
-                    </div>
-
-                    <!-- SUP -->
-                    <div class="bg-zinc-300 rounded-3xl overflow-hidden group relative aspect-[4/5] sm:aspect-square lg:aspect-[3/4]">
-                       <src="surfboard__sudak_prokat.webp" class="w-full h-full object-cover" alt="прокат сапбордов Судак">
-                        <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
-                        <div class="absolute bottom-6 left-6 text-white">
-                            <p class="grotesk font-black text-2xl uppercase">SUP-борды</p>
-                        </div>
-                    </div>
-
-                    <!-- Электросамокаты -->
-                    <div class="bg-zinc-300 rounded-3xl overflow-hidden group relative aspect-[4/5] sm:aspect-square lg:aspect-[3/4]">
-                      <src="electric_scooter_procat.webp" class="w-full h-full object-cover" alt="прокат электросамокатов Судак">
-                        <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
-                        <div class="absolute bottom-6 left-6 text-white font-black text-2xl uppercase">Самокаты</div>
+                        <div class="flex text-yellow-400 mb-4"><i data-lucide="star" class="w-3 h-3 fill-current"></i><i data-lucide="star" class="w-3 h-3 fill-current"></i><i data-lucide="star" class="w-3 h-3 fill-current"></i><i data-lucide="star" class="w-3 h-3 fill-current"></i><i data-lucide="star" class="w-3 h-3 fill-current"></i></div>
+                        <p class="text-sm text-zinc-600 italic">"Скутеры в идеале. На Меганом долетели за 15 минут. Рекомендую!"</p>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- SEO Текст Главная -->
-        <section class="py-24 px-6 bg-white">
-            <div class="max-w-4xl mx-auto seo-section text-center md:text-left">
-                <h2 class="text-4xl font-black grotesk uppercase mb-8">Прокат техники в Судаке: Скутеры, Велосипеды, Сапборды</h2>
-                <p>Добро пожаловать в <strong>Прокат Судак</strong> на сезон 2026! Мы предлагаем лучший выбор техники для активного отдыха в Крыму. Наш пункт проката удобно расположен по адресу <em>ул. Юбилейная 3/4</em>, откуда легко добраться до набережной или отправиться в сторону Нового Света.</p>
-                <p>В нашем парке только исправная и обслуженная техника: маневренные скутеры для поездок по всему Крыму, горные велосипеды для покорения Меганома и современные сапборды для морских прогулок у мыса Алчак. Выбирайте свободу передвижения вместе с нами!</p>
-            </div>
-        </section>
+        <!-- SEO HOME -->
+        <article class="seo-section bg-zinc-50">
+            <h2>Прокат в Судаке 2026: Скутеры, Велосипеды, SUP</h2>
+            <p>Добро пожаловать в <strong>«Прокат Судак»</strong> — ваш надежный партнер для активного отдыха. Наш пункт проката на <em>улице Юбилейная 3/4</em> — удобная точка для старта к <strong>АРТ Тавриде</strong> или <strong>Новому Свету</strong>.</p>
+        </article>
     </div>
 
-    <!-- РАЗДЕЛ ВЕЛОСИПЕДЫ -->
+    <!-- BIKES VIEW -->
     <div id="view-bikes" class="view-section hidden-view">
-        <main class="pt-32 pb-24 px-6 max-w-7xl mx-auto">
-            <nav class="mb-12 flex items-center justify-between">
-                <div class="flex items-center gap-4 text-xs font-bold uppercase tracking-widest text-zinc-400">
-                    <a href="javascript:void(0)" onclick="switchView('home')" class="hover:text-black">Главная</a>
-                    <span>/</span>
-                    <span class="text-black">Велосипеды</span>
+        <div class="pt-32 pb-24 px-6 max-w-7xl mx-auto text-black">
+            <button onclick="switchView('home')" class="mb-8 flex items-center gap-2 font-bold uppercase text-xs bg-zinc-100 px-4 py-2 rounded-full hover:bg-black hover:text-white transition-all"><i data-lucide="arrow-left" class="w-4 h-4"></i> Назад</button>
+            <h1 class="text-huge font-black grotesk uppercase mb-16">Велосипеды</h1>
+            
+            <section class="grid grid-cols-1 md:grid-cols-2 gap-12 mb-32">
+                <div class="product-card flex flex-col lg:flex-row gap-8">
+                    <div class="lg:w-1/2 aspect-square rounded-2xl overflow-hidden"><img src="https://images.unsplash.com/photo-1485965120184-e220f721d03e?auto=format&fit=crop&q=80&w=800" class="w-full h-full object-cover"></div>
+                    <div class="lg:w-1/2 flex flex-col justify-center">
+                        <h3 class="text-3xl font-black uppercase mb-4">Elite MTB 29"</h3>
+                        <p class="text-zinc-500 mb-6 text-sm">Найнер для горных троп. Дисковые тормоза.</p>
+                        <span class="text-2xl font-black text-blue-600">300₽ / час</span>
+                    </div>
                 </div>
-                <button onclick="switchView('home')" class="flex items-center gap-2 text-xs font-bold uppercase bg-zinc-100 px-6 py-3 rounded-full hover:bg-black hover:text-white transition-all">
-                    <i data-lucide="arrow-left" class="w-4 h-4"></i> Назад
-                </button>
-            </nav>
-
-            <h1 class="text-huge font-black grotesk uppercase mb-16">Каталог Вело 2026</h1>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-32">
-                <article class="flex flex-col gap-6">
-                    <div class="aspect-[3/4] rounded-3xl overflow-hidden bg-zinc-100">
-                      <img src="bike_sudak.webp" class="w-full h-full object-cover" alt="Велосипед 26 дюймов">
-                    </div>
-                    <div>
-                        <h2 class="text-2xl font-black grotesk uppercase mb-2">Standard 26"</h2>
-                        <p class="text-sm text-zinc-500 mb-4 tracking-tight">Для прогулок по городу. Колеса 26", рост 165-175 см.</p>
-                        <p class="text-xl font-bold text-blue-600">500₽ / час</p>
-                    </div>
-                </article>
-
-                <article class="flex flex-col gap-6">
-                    <div class="aspect-[3/4] rounded-3xl overflow-hidden bg-zinc-100">
-                        <img src="bike_arenda_sudak.webp" class="w-full h-full object-cover" alt="Велосипед 27.5 дюймов">
-                    </div>
-                    <div>
-                        <h2 class="text-2xl font-black grotesk uppercase mb-2">Mountain 27.5"</h2>
-                        <p class="text-sm text-zinc-500 mb-4 tracking-tight">Горный MTB для троп Судака. Рост 175-185 см.</p>
-                        <p class="text-xl font-bold text-blue-600">500₽ / час</p>
-                    </div>
-                </article>
-
-                <article class="flex flex-col gap-6">
-                    <div class="aspect-[3/4] rounded-3xl overflow-hidden bg-zinc-100">
-                        <img src="bike_arenda_sudak.webp" class="w-full h-full object-cover" alt="Велосипед 29 дюймов">
-                    </div>
-                    <div>
-                        <h2 class="text-2xl font-black grotesk uppercase mb-2">Большие колеса 29"</h2>
-                        <p class="text-sm text-zinc-500 mb-4 tracking-tight">Найнер с отличным накатом. Колеса 29", рост от 185 см.</p>
-                        <p class="text-xl font-bold text-blue-600">500₽ / час</p>
-                    </div>
-                </article>
-
-                <article class="flex flex-col gap-6">
-                    <div class="aspect-[3/4] rounded-3xl overflow-hidden bg-blue-50 border border-blue-100">
-                        <img src="arenda_velosipeda_sudak.webp" class="w-full h-full object-cover" alt="Детский велосипед">
-                    </div>
-                    <div>
-                        <h2 class="text-2xl font-black grotesk uppercase mb-2 text-blue-600">Junior Kids</h2>
-                        <p class="text-sm text-zinc-500 mb-4 tracking-tight">Для юных райдеров в Судаке. Рост до 160 см.</p>
-                        <p class="text-xl font-bold text-blue-600">500₽ / час</p>
-                    </div>
-                </article>
-            </div>
-
-            <!-- FAQ Велосипеды -->
-            <section class="max-w-3xl mb-32 seo-section">
-                <h2 class="text-4xl font-black grotesk uppercase mb-12">Условия проката велосипедов 2026</h2>
-                <div class="space-y-2">
-                    <div class="faq-item">
-                        <div class="faq-question" onclick="toggleFaq(this)">
-                            <h3 class="text-lg font-bold uppercase tracking-tighter">Какой залог за велосипед?</h3>
-                            <i data-lucide="plus" class="faq-icon"></i>
-                        </div>
-                        <div class="faq-answer">Денежный залог составляет 5000₽ за велосипед. Паспорт РФ в залог не принимается, только для оформления договора.</div>
-                    </div>
-                    <div class="faq-item">
-                        <div class="faq-question" onclick="toggleFaq(this)">
-                            <h3 class="text-lg font-bold uppercase tracking-tighter">Выдаете ли вы замки и шлемы?</h3>
-                            <i data-lucide="plus" class="faq-icon"></i>
-                        </div>
-                        <div class="faq-answer">Да, по запросу мы каждому клиенту бесплатно выдаем надежный противоугонный замок и защитный шлем.</div>
+                <div class="product-card flex flex-col lg:flex-row gap-8">
+                    <div class="lg:w-1/2 aspect-square rounded-2xl overflow-hidden"><img src="https://images.unsplash.com/photo-1532298229144-0ee0c97d158b?auto=format&fit=crop&q=80&w=800" class="w-full h-full object-cover"></div>
+                    <div class="lg:w-1/2 flex flex-col justify-center">
+                        <h3 class="text-3xl font-black uppercase mb-4">City Cruise 26"</h3>
+                        <p class="text-zinc-500 mb-6 text-sm">Для прогулок по набережной.</p>
+                        <span class="text-2xl font-black text-blue-600">200₽ / час</span>
                     </div>
                 </div>
             </section>
-        </main>
+
+            <section class="mb-32">
+                <h2 class="text-4xl font-black grotesk uppercase mb-12">Маршруты</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <div class="route-card">
+                        <img src="https://images.unsplash.com/photo-1544191696-102dbdaeeaa0?auto=format&fit=crop&q=80&w=600" class="w-full h-48 object-cover">
+                        <div class="p-6">
+                            <h4 class="font-bold uppercase mb-2">Тропа Алчак</h4>
+                            <p class="text-xs text-zinc-500 mb-4">Живописный путь вокруг горы.</p>
+                            <a href="https://yandex.ru/maps/?rtext=~44.839446,34.990425" target="_blank" class="flex items-center justify-center gap-2 w-full bg-black text-white py-3 rounded-xl font-bold uppercase text-[10px] hover:bg-blue-600 transition-all mb-4">Навигация <i data-lucide="navigation"></i></a>
+                            <div class="route-map-overlay"><div class="absolute inset-0 flex items-center justify-center text-red-500 font-bold text-[10px]">КРАСНАЯ ЛИНИЯ МАРШРУТА</div></div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="seo-section !px-0">
+                <h2>Аренда велосипедов в Судаке 2026</h2>
+                <p><strong>Велопрокат в Судаке</strong> — это здоровье и свобода. Мы предлагаем горные велосипеды для покорения троп Алчака и Капселя.</p>
+            </section>
+
+            <section class="max-w-3xl mb-32">
+                <h2 class="text-4xl font-black grotesk uppercase mb-12">FAQ</h2>
+                <div class="faq-item"><div class="faq-question" onclick="toggleFaq(this)"><h3 class="font-bold uppercase">Залог?</h3><i data-lucide="plus" class="faq-icon"></i></div><div class="faq-answer">2000₽ за велик или документ.</div></div>
+            </section>
+        </div>
     </div>
 
-    <!-- ОБЩИЕ КОНТАКТЫ -->
-    <section id="contacts" class="py-24 px-6 bg-zinc-50 border-t border-zinc-200">
-        <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16">
-            <div class="space-y-12">
-                <h2 class="text-6xl font-black grotesk uppercase">Контакты</h2>
-                <div class="space-y-6 text-center md:text-left">
+    <!-- SCOOTERS VIEW -->
+    <div id="view-scooters" class="view-section hidden-view">
+        <div class="pt-32 pb-24 px-6 max-w-7xl mx-auto text-black">
+            <button onclick="switchView('home')" class="mb-8 flex items-center gap-2 font-bold uppercase text-xs bg-zinc-100 px-4 py-2 rounded-full hover:bg-black hover:text-white transition-all"><i data-lucide="arrow-left" class="w-4 h-4"></i> Назад</button>
+            <h1 class="text-huge font-black grotesk uppercase mb-16">Скутеры Vento</h1>
+
+            <section class="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-32">
+                <div class="product-card flex flex-col gap-8">
+                    <div class="aspect-video rounded-2xl overflow-hidden bg-zinc-100 border-4 border-white shadow-lg"><img src="https://images.unsplash.com/photo-1450041392552-f3b400f803c8?auto=format&fit=crop&q=80&w=1000" class="w-full h-full object-cover"></div>
                     <div>
-                        <p class="text-zinc-500 uppercase tracking-widest text-xs font-bold mb-2">Наш адрес</p>
-                        <p class="text-3xl font-bold grotesk">г. Судак, ул. Юбилейная 3/4</p>
-                    </div>
-                    <div>
-                        <p class="text-zinc-500 uppercase tracking-widest text-xs font-bold mb-2">Бронирование 2026</p>
-                        <a href="tel:+79785306550" class="text-3xl font-bold grotesk hover:text-blue-600 transition-colors tracking-tight">+7 (978) 530-65-50</a>
+                        <h3 class="text-4xl font-black uppercase mb-4 text-blue-600">VMC Vento Retro</h3>
+                        <p class="text-zinc-600 mb-8 leading-relaxed">Итальянский стиль. Идеален для фотосессий и поездок вдоль моря вдвоем.</p>
+                        <div class="grid grid-cols-3 gap-6 mb-8 text-left">
+                            <div><p class="spec-label">Объем</p><p class="spec-value">50 / 125 cc</p></div>
+                            <div><p class="spec-label">Расход</p><p class="spec-value">2.5 л/100км</p></div>
+                            <div><p class="spec-label">Пассажир</p><p class="spec-value">Да</p></div>
+                        </div>
+                        <span class="text-3xl font-black">1800₽ / сутки</span>
                     </div>
                 </div>
-                <div class="flex justify-center md:justify-start">
-                    <a href="https://yandex.ru/maps/-/CLtQv6j6" target="_blank" class="inline-flex items-center gap-4 bg-black text-white px-10 py-5 rounded-2xl hover:bg-zinc-800 transition-all">
-                        <i data-lucide="map-pin"></i>
-                        <span class="font-bold grotesk uppercase tracking-tighter">Маршрут в Яндекс Картах</span>
-                    </a>
+                <div class="product-card flex flex-col gap-8">
+                    <div class="aspect-video rounded-2xl overflow-hidden bg-zinc-100 border-4 border-white shadow-lg"><img src="https://images.unsplash.com/photo-1591857177580-dc82b9ac4e1e?auto=format&fit=crop&q=80&w=1000" class="w-full h-full object-cover"></div>
+                    <div>
+                        <h3 class="text-4xl font-black uppercase mb-4">Vento Smart 3</h3>
+                        <p class="text-zinc-600 mb-8 leading-relaxed">Современный маневренный скутер с LED оптикой. Отлично для поездок на Меганом.</p>
+                        <div class="grid grid-cols-3 gap-6 mb-8 text-left">
+                            <div><p class="spec-label">Объем</p><p class="spec-value">125 cc</p></div>
+                            <div><p class="spec-label">Тормоза</p><p class="spec-value">Дисковые</p></div>
+                            <div><p class="spec-label">Кат.</p><p class="spec-value">A / M</p></div>
+                        </div>
+                        <span class="text-3xl font-black">2500₽ / сутки</span>
+                    </div>
                 </div>
-            </div>
-            <div class="h-[450px] rounded-3xl overflow-hidden shadow-2xl grayscale hover:grayscale-0 transition-all duration-700">
-                <iframe src="https://yandex.ru/map-widget/v1/?ll=34.974558%2C44.851603&z=17" width="100%" height="100%" frameborder="0"></iframe>
+            </section>
+
+            <section class="mb-32">
+                <h2 class="text-4xl font-black grotesk uppercase mb-12">Маршруты</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div class="route-card">
+                        <div class="p-6">
+                            <h4 class="font-bold uppercase text-lg mb-2">Маяк Меганом</h4>
+                            <p class="text-sm text-zinc-500 mb-6">15 минут от города по асфальту. Лучшие закаты Крыма.</p>
+                            <a href="https://yandex.ru/maps/?rtext=~44.793611,35.080556" target="_blank" class="flex items-center justify-center gap-2 w-full bg-black text-white py-3 rounded-xl font-bold uppercase text-[10px] hover:bg-blue-600 transition-all mb-4">Навигация <i data-lucide="navigation"></i></a>
+                            <div class="route-map-overlay"><div class="absolute inset-0 flex items-center justify-center text-red-600 font-bold text-[10px]">ПУТЬ К МАЯКУ</div></div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <article class="seo-section !px-0">
+                <h2>Аренда скутеров в Судаке без прав 2026</h2>
+                <p>Хотите объехать <strong>Судак и Меганом</strong>? Аренда скутера 50сс — лучший вариант. <strong>Vento Retro</strong> подарит вам незабываемые эмоции и яркие фото.</p>
+            </article>
+
+            <section class="max-w-3xl mb-32"><h2 class="text-4xl font-black grotesk uppercase mb-12">FAQ: Скутеры</h2><div class="faq-item"><div class="faq-question" onclick="toggleFaq(this)"><h3 class="font-bold uppercase text-black">Какие права?</h3><i data-lucide="plus" class="faq-icon text-black"></i></div><div class="faq-answer">Для 50сс любая категория (M, B). Для 125сс — категория А. Залог 5000₽.</div></div></section>
+        </div>
+    </div>
+
+    <!-- GLOBAL GALLERY -->
+    <section id="global-gallery" class="py-24 px-6 bg-zinc-900 overflow-hidden">
+        <div class="max-w-7xl mx-auto">
+            <h2 class="text-6xl font-black grotesk uppercase mb-16 text-white text-center">Атмосфера проката</h2>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 inner-gallery">
+                <div class="h-64 sm:h-96 col-span-2"><img src="https://images.unsplash.com/photo-1517176641128-d47e4483719b?auto=format&fit=crop&q=80&w=1200"></div>
+                <div class="h-64 sm:h-96"><img src="https://images.unsplash.com/photo-1543615170-0775709d0233?auto=format&fit=crop&q=80&w=800"></div>
+                <div class="h-64 sm:h-96"><img src="https://images.unsplash.com/photo-1471506480208-8a93dae41f22?auto=format&fit=crop&q=80&w=800"></div>
+                <div class="h-64 sm:h-96"><img src="https://images.unsplash.com/photo-1558231221-18e3bc63595c?auto=format&fit=crop&q=80&w=800"></div>
             </div>
         </div>
     </section>
 
-    <!-- Футер -->
-    <footer class="py-12 px-6 bg-white text-center border-t border-zinc-100">
-        <p class="grotesk font-bold text-zinc-400 text-sm uppercase tracking-widest">© 2026 Прокат Судак — Крым. Все права защищены.</p>
-        <div class="mt-4 text-[10px] text-zinc-300 uppercase tracking-widest">
-            Разработка сайта: <a href="#" class="hover:text-blue-600 underline transition-colors">Digital Studio</a>
+    <!-- CONTACTS -->
+    <section id="contacts" class="py-24 px-6 bg-zinc-100 border-t border-zinc-200 text-black">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16">
+            <div class="space-y-12 text-left">
+                <h2 class="text-6xl font-black grotesk uppercase">Где мы?</h2>
+                <div class="space-y-6">
+                    <div><p class="text-blue-600 uppercase text-[10px] font-bold mb-2 tracking-widest">Адрес проката</p><p class="text-3xl font-bold">Судак, ул. Юбилейная 3/4</p></div>
+                    <div><p class="text-blue-600 uppercase text-[10px] font-bold mb-2 tracking-widest">Связь 2026</p><a href="tel:+79785306550" class="text-3xl font-bold hover:text-blue-600 transition-colors">+7 (978) 530-65-50</a></div>
+                </div>
+                <div class="flex flex-col sm:flex-row gap-4">
+                    <a href="https://yandex.ru/maps/org/prokat_sudak/" target="_blank" class="inline-flex items-center justify-center gap-4 bg-black text-white px-10 py-5 rounded-2xl hover:bg-zinc-800 transition-all">
+                        <i data-lucide="map-pin"></i><span class="font-bold grotesk uppercase tracking-tight">Открыть Карты</span>
+                    </a>
+                    <a href="https://yandex.ru/maps/?rtext=~44.851603,34.974558" target="_blank" class="inline-flex items-center justify-center gap-4 bg-blue-600 text-white px-10 py-5 rounded-2xl hover:bg-blue-700 transition-all shadow-lg">
+                        <i data-lucide="navigation"></i><span class="font-bold grotesk uppercase tracking-tight">Маршрут к нам</span>
+                    </a>
+                </div>
+            </div>
+            <div class="h-[450px] rounded-3xl overflow-hidden shadow-2xl border-4 border-white"><iframe src="https://yandex.ru/map-widget/v1/?ll=34.974558%2C44.851603&z=17" width="100%" height="100%" frameborder="0"></iframe></div>
         </div>
+    </section>
+
+    <footer class="py-12 px-6 bg-white text-center border-t border-zinc-100 text-zinc-400">
+        <p class="grotesk font-bold text-sm uppercase tracking-widest">© 2026 Прокат Судак — Крым. Все права защищены.</p>
     </footer>
 
-   <script>
-        // Инициализация Lucide
-        lucide.createIcons();
+    <script>
+        // --- THREE.JS 3D SUN EFFECT ---
+        let scene, camera, renderer, sun, particles;
+        const sunContainer = document.getElementById('sun-canvas-container');
 
-        // Логика переключения
+        function init3D() {
+            if (!sunContainer) return;
+            scene = new THREE.Scene();
+            camera = new THREE.PerspectiveCamera(75, sunContainer.offsetWidth / sunContainer.offsetHeight, 0.1, 1000);
+            camera.position.z = 5;
+
+            renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+            renderer.setSize(sunContainer.offsetWidth, sunContainer.offsetHeight);
+            renderer.setPixelRatio(window.devicePixelRatio);
+            sunContainer.appendChild(renderer.domElement);
+
+            const sunGeometry = new THREE.SphereGeometry(1.5, 32, 32);
+            const sunMaterial = new THREE.MeshBasicMaterial({ color: 0xffcc33 });
+            sun = new THREE.Mesh(sunGeometry, sunMaterial);
+            sun.position.y = -3;
+            scene.add(sun);
+
+            const pGeometry = new THREE.BufferGeometry();
+            const pCount = 500;
+            const pCoords = new Float32Array(pCount * 3);
+            for(let i=0; i<pCount; i++) {
+                pCoords[i*3] = (Math.random() - 0.5) * 20;
+                pCoords[i*3+1] = (Math.random() - 0.5) * 20;
+                pCoords[i*3+2] = (Math.random() - 0.5) * 10;
+            }
+            pGeometry.setAttribute('position', new THREE.BufferAttribute(pCoords, 3));
+            const pMaterial = new THREE.PointsMaterial({ color: 0xffaa00, size: 0.05, transparent: true, opacity: 0.5 });
+            particles = new THREE.Points(pGeometry, pMaterial);
+            scene.add(particles);
+
+            window.addEventListener('mousemove', (e) => {
+                const x = (e.clientX / window.innerWidth) - 0.5;
+                const y = (e.clientY / window.innerHeight) - 0.5;
+                camera.position.x += (x - camera.position.x) * 0.05;
+                camera.position.y += (-y - camera.position.y) * 0.05;
+                camera.lookAt(scene.position);
+            });
+            animate();
+        }
+
+        function animate() {
+            requestAnimationFrame(animate);
+            if (sun && sun.position.y < 0.5) sun.position.y += 0.005;
+            if (particles) particles.rotation.y += 0.001;
+            if (renderer && scene && camera) renderer.render(scene, camera);
+        }
+
+        window.onload = () => { init3D(); lucide.createIcons(); };
+
+        // --- SPA LOGIC ---
         function switchView(viewId) {
             const views = ['home', 'bikes', 'scooters', 'e-scooters', 'sup'];
             views.forEach(v => {
                 const el = document.getElementById('view-' + v);
                 if (el) el.classList.add('hidden-view');
             });
-
-            const targetView = document.getElementById('view-' + viewId);
-            if (targetView) {
-                targetView.classList.remove('hidden-view');
-                // Маленький хак для анимации иконок в скрытых блоках
-                setTimeout(() => { lucide.createIcons(); }, 10);
+            const target = document.getElementById('view-' + viewId);
+            if (target) {
+                target.classList.remove('hidden-view');
+                setTimeout(() => { lucide.createIcons(); }, 50);
             }
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        // Мобильное меню
-        function toggleMenu() {
-            document.getElementById('mobile-menu-overlay').classList.toggle('open');
+        function toggleMenu() { document.getElementById('mobile-menu-overlay').classList.toggle('open'); }
+        function menuNavigate(v, a = null) {
+            toggleMenu(); switchView(v);
+            if(a) setTimeout(() => {
+                const el = document.querySelector(a);
+                if (el) el.scrollIntoView({ behavior: 'smooth' });
+            }, 100);
         }
+        function toggleFaq(el) { el.parentElement.classList.toggle('active'); }
 
-        function menuNavigate(viewId, anchor = null) {
-            toggleMenu();
-            switchView(viewId);
-            if (anchor) {
-                setTimeout(() => {
-                    document.querySelector(anchor).scrollIntoView({ behavior: 'smooth' });
-                }, 100);
+        window.addEventListener('resize', () => {
+            if(camera && renderer && sunContainer) {
+                camera.aspect = sunContainer.offsetWidth / sunContainer.offsetHeight;
+                camera.updateProjectionMatrix();
+                renderer.setSize(sunContainer.offsetWidth, sunContainer.offsetHeight);
             }
-        }
-
-        function toggleFaq(el) {
-            el.parentElement.classList.toggle('active');
-        }
-
-        // Плавное появление
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('opacity-100');
-                    entry.target.style.transform = 'translateY(0)';
-                }
-            });
-        }, { threshold: 0.1 });
-
-        document.querySelectorAll('section, article').forEach(el => {
-            el.style.transform = 'translateY(20px)';
-            el.classList.add('transition-all', 'duration-700', 'opacity-0');
-            observer.observe(el);
         });
     </script>
 </body>
 </html>
-
-
-
-
 
