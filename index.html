@@ -129,10 +129,10 @@
         <a href="javascript:void(0)" onclick="switchView('home')" class="grotesk font-bold text-2xl tracking-tighter uppercase">Судак / Прокат</a>
         <div class="hidden md:flex gap-8 uppercase text-xs font-bold tracking-widest">
             <a href="javascript:void(0)" onclick="switchView('home')" class="hover:opacity-50">Главная</a>
-            <a href="javascript:void(0)" onclick="switchView('bikes')" class="hover:opacity-50">Вело</a>
-            <a href="javascript:void(0)" onclick="switchView('scooters')" class="hover:opacity-50">Скутеры</a>
-            <a href="javascript:void(0)" onclick="switchView('e-scooters')" class="hover:opacity-50">Самокаты</a>
-            <a href="javascript:void(0)" onclick="switchView('sup')" class="hover:opacity-50">SUP</a>
+            <a href="javascript:void(0)" onclick="menuNavigate('home', '#bikes-block')" class="hover:opacity-50">Вело</a>
+            <a href="javascript:void(0)" onclick="menuNavigate('home', '#scooters-block')" class="hover:opacity-50">Скутеры</a>
+            <a href="javascript:void(0)" onclick="menuNavigate('home', '#escooters-block')" class="hover:opacity-50">Самокаты</a>
+            <a href="javascript:void(0)" onclick="menuNavigate('home', '#sup-block')" class="hover:opacity-50">SUP</a>
         </div>
         <div class="md:hidden cursor-pointer" onclick="toggleMenu()"><i data-lucide="menu"></i></div>
     </nav>
@@ -159,75 +159,294 @@
             </div>
         </header>
 
-        <!-- Галерея категорий -->
+        <!-- Галерея категорий (ЯКОРНЫЕ ССЫЛКИ) -->
         <section id="gallery-main" class="py-24 px-6 bg-zinc-50">
             <div class="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 text-black">
-                <div onclick="switchView('scooters')" class="bg-zinc-200 rounded-3xl overflow-hidden relative group aspect-[3/4] cursor-pointer">
-                    <img src="scooter_sudak_procat.webp" class="w-full h-full object-cover">
+                <!-- Скутеры -->
+                <div onclick="document.getElementById('scooters-block').scrollIntoView({behavior: 'smooth'})" class="bg-zinc-200 rounded-3xl overflow-hidden relative group aspect-[3/4] cursor-pointer">
+                       <img src="scooter_sudak_procat.webp" alt="Прокат скутеров">
                     <div class="absolute inset-0 bg-black/30 group-hover:bg-black/10 transition-all"></div>
                     <div class="absolute bottom-6 left-6 text-white text-left"><p class="grotesk font-black text-2xl uppercase leading-none">Скутеры</p></div>
                 </div>
-                <div onclick="switchView('bikes')" class="bg-zinc-200 rounded-3xl overflow-hidden relative group aspect-[3/4] cursor-pointer">
-                    <img src="procat_velosipeda_sudak.webp">
+                <!-- Велосипеды -->
+                <div onclick="document.getElementById('bikes-block').scrollIntoView({behavior: 'smooth'})" class="bg-zinc-200 rounded-3xl overflow-hidden relative group aspect-[3/4] cursor-pointer">
+                     <img src="procat_velosipeda_sudak.webp"> class="w-full h-full object-cover" alt="Прокат велосипедов">
                     <div class="absolute inset-0 bg-black/30 group-hover:bg-black/10 transition-all"></div>
                     <div class="absolute bottom-6 left-6 text-white text-left"><p class="grotesk font-black text-2xl uppercase leading-none">Велосипеды</p></div>
                 </div>
-                <div onclick="switchView('sup')" class="bg-zinc-300 rounded-3xl overflow-hidden group relative aspect-[3/4] cursor-pointer">
-                    <img src="surfboard__sudak_prokat.webp">
+                <!-- SUP -->
+                <div onclick="document.getElementById('sup-block').scrollIntoView({behavior: 'smooth'})" class="bg-zinc-300 rounded-3xl overflow-hidden group relative aspect-[3/4] cursor-pointer">
+                  <img src="surfboard__sudak_prokat.webp"> class="w-full h-full object-cover" alt="Аренда SUP-бордов">
                     <div class="absolute inset-0 bg-black/30 group-hover:bg-black/10 transition-all"></div>
                     <div class="absolute bottom-6 left-6 text-white text-left"><p class="grotesk font-black text-2xl uppercase leading-none">Сапборды</p></div>
                 </div>
-                <div onclick="switchView('e-scooters')" class="bg-zinc-300 rounded-3xl overflow-hidden group relative aspect-[3/4] cursor-pointer">
-                    <img src="electric_scooter_procat.webp">
+                <!-- Самокаты -->
+                <div onclick="document.getElementById('escooters-block').scrollIntoView({behavior: 'smooth'})" class="bg-zinc-300 rounded-3xl overflow-hidden group relative aspect-[3/4] cursor-pointer">
+                          <img src="electric_scooter_procat.webp"> class="w-full h-full object-cover" alt="Электросамокаты">
                     <div class="absolute inset-0 bg-black/30 group-hover:bg-black/10 transition-all"></div>
                     <div class="absolute bottom-6 left-6 text-white text-left"><p class="grotesk font-black text-2xl uppercase leading-none">Самокаты</p></div>
                 </div>
             </div>
         </section>
 
-    
+        <!-- БЛОК: СКУТЕРЫ -->
+        <section id="scooters-block" class="py-24 px-6 bg-white">
+            <div class="max-w-7xl mx-auto">
+                <h2 class="text-6xl font-black grotesk uppercase mb-16">Скутеры 2026</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-12 mb-16">
+                    <div class="product-card flex flex-col gap-6">
+                        <div class="aspect-video rounded-3xl overflow-hidden bg-zinc-100">
+                           <img src="sup_otdix_krim.webp" class="w-full h-full object-cover" alt="Vento Retro">
+                        </div>
+                        <h3 class="text-3xl font-black uppercase grotesk">VMC Vento Retro</h3>
+                        <p class="text-zinc-500">Итальянская классика для стильных прогулок по окрестностям Судака. Идеален для фотосессий.</p>
+                        <div class="flex justify-between items-center mt-auto">
+                            <span class="text-2xl font-black text-blue-600">2500₽ / сутки</span>
+                        </div>
+                    </div>
+                    <div class="product-card flex flex-col gap-6">
+                        <div class="aspect-video rounded-3xl overflow-hidden bg-zinc-100">
+                            <img src="transport_arenda_sudak.webp" class="w-full h-full object-cover" alt="Vento Smart 3">
+                        </div>
+                        <h3 class="text-3xl font-black uppercase grotesk">Vento Smart 3</h3>
+                        <p class="text-zinc-500">Мощный и современный скутер для поездок в любую точку Крыма. Идеален для поездки вдвоем.</p>
+                        <div class="flex justify-between items-center mt-auto">
+                            <span class="text-2xl font-black text-blue-600">3500₽ / сутки</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-12 bg-zinc-50 p-12 rounded-[3rem]">
+                    <div>
+                        <h4 class="text-xl font-black uppercase grotesk mb-6">Условия аренды скутеров</h4>
+                        <ul class="space-y-4 text-sm font-medium">
+                            <li class="flex items-start gap-3"><i data-lucide="check-circle" class="w-5 h-5 text-blue-600"></i> Паспорт РФ и возраст от 18 лет</li>
+                            <li class="flex items-start gap-3"><i data-lucide="check-circle" class="w-5 h-5 text-blue-600"></i> Права категории М, А или В</li>
+                            <li class="flex items-start gap-3"><i data-lucide="check-circle" class="w-5 h-5 text-blue-600"></i> Залог: 10 000₽ + оригинал документа</li>
+                            <li class="flex items-start gap-3"><i data-lucide="check-circle" class="w-5 h-5 text-blue-600"></i> Шлемы выдаем бесплатно</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="text-xl font-black uppercase grotesk mb-6">FAQ</h4>
+                        <div class="faq-item">
+                            <div class="faq-question" onclick="toggleFaq(this)"><span class="font-bold">Нужно ли заправлять скутер?</span><i data-lucide="plus" class="faq-icon"></i></div>
+                            <div class="faq-answer">Скутер выдается чистым и с полным баком. Вернуть нужно в таком же состоянии.</div>
+                        </div>
+                        <div class="faq-item">
+                            <div class="faq-question" onclick="toggleFaq(this)"><span class="font-bold">Можно ли ездить вдвоем?</span><i data-lucide="plus" class="faq-icon"></i></div>
+                            <div class="faq-answer">Да, все наши скутеры двухместные и оборудованы подножками для пассажира.</div>
+                        </div>
+                         <div class="faq-item">
+                            <div class="faq-question" onclick="toggleFaq(this)"><span class="font-bold">Нужен ли опыт вождения?</span><i data-lucide="plus" class="faq-icon"></i></div>
+                            <div class="faq-answer">Да, мы не выдаем скутеры если человек ни разу не управлял мототехникой.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- БЛОК: ВЕЛОСИПЕДЫ -->
+        <section id="bikes-block" class="py-24 px-6 bg-zinc-50">
+            <div class="max-w-7xl mx-auto text-center">
+                <h2 class="text-6xl font-black grotesk uppercase mb-16">Велосипеды</h2>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6 mb-16">
+                    <!-- Bike 1 -->
+                    <div class="bg-white p-6 rounded-[2.5rem] flex flex-col items-center">
+                        <div class="w-full aspect-square rounded-2xl overflow-hidden mb-6"><img src="https://images.unsplash.com/photo-1485965120184-e220f721d03e?q=80&w=400" class="w-full h-full object-cover"></div>
+                        <h3 class="font-black uppercase text-sm mb-2">Elite MTB 29"</h3>
+                        <p class="text-xs text-zinc-400 mb-4">Для профи</p>
+                        <p class="font-black text-blue-600">500₽/час</p>
+                    </div>
+                    <!-- Bike 2 -->
+                    <div class="bg-white p-6 rounded-[2.5rem] flex flex-col items-center">
+                        <div class="w-full aspect-square rounded-2xl overflow-hidden mb-6"><img src="https://images.unsplash.com/photo-1576435728678-68d0fbf94e91?q=80&w=400" class="w-full h-full object-cover"></div>
+                        <h3 class="font-black uppercase text-sm mb-2">Mountain 27.5"</h3>
+                        <p class="text-xs text-zinc-400 mb-4">Универсальный</p>
+                        <p class="font-black text-blue-600">500₽/час</p>
+                    </div>
+                    <!-- Bike 3 -->
+                    <div class="bg-white p-6 rounded-[2.5rem] flex flex-col items-center">
+                        <div class="w-full aspect-square rounded-2xl overflow-hidden mb-6"><img src="https://images.unsplash.com/photo-1532298229144-0ee0c97d158b?q=80&w=400" class="w-full h-full object-cover"></div>
+                        <h3 class="font-black uppercase text-sm mb-2">City Cruise 26"</h3>
+                        <p class="text-xs text-zinc-400 mb-4">Городской</p>
+                        <p class="font-black text-blue-600">500₽/час</p>
+                    </div>
+                    <!-- Bike 4 -->
+                    <div class="bg-white p-6 rounded-[2.5rem] flex flex-col items-center">
+                        <div class="w-full aspect-square rounded-2xl overflow-hidden mb-6"><img src="https://images.unsplash.com/photo-1507035895480-2b3156c31fc8?q=80&w=400" class="w-full h-full object-cover"></div>
+                        <h3 class="font-black uppercase text-sm mb-2">Lady Style</h3>
+                        <p class="text-xs text-zinc-400 mb-4">С корзиной</p>
+                        <p class="font-black text-blue-600">500₽/час</p>
+                    </div>
+                    <!-- Bike 5 -->
+                    <div class="bg-white p-6 rounded-[2.5rem] flex flex-col items-center">
+                        <div class="w-full aspect-square rounded-2xl overflow-hidden mb-6"><img src="https://images.unsplash.com/photo-1593450974665-985c57b7f941?q=80&w=400" class="w-full h-full object-cover"></div>
+                        <h3 class="font-black uppercase text-sm mb-2 text-blue-600">Junior 24"</h3>
+                        <p class="text-xs text-zinc-400 mb-4">Для подростков</p>
+                        <p class="font-black text-blue-600">500₽/час</p>
+                    </div>
+                </div>
+                <div class="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 text-left">
+                    <div class="bg-white p-8 rounded-3xl">
+                        <h4 class="font-black uppercase mb-4">Условия проката</h4>
+                        <p class="text-sm text-zinc-500 mb-4">Залог: 5000₽ или оригинал документа (права/СТС). В стоимость входит противоугонный замок.</p>
+                        <div class="flex gap-4">
+                            <span class="text-[10px] bg-zinc-100 px-3 py-1 rounded-full font-bold uppercase">Обслужено 2026</span>
+                            <span class="text-[10px] bg-zinc-100 px-3 py-1 rounded-full font-bold uppercase">Чистые шлемы</span>
+                        </div>
+                    </div>
+                    <div class="space-y-2">
+                        <div class="faq-item">
+                            <div class="faq-question" onclick="toggleFaq(this)"><span class="font-bold text-sm uppercase">Есть ли детские кресла?</span><i data-lucide="plus" class="faq-icon"></i></div>
+                            <div class="faq-answer">Да, устанавливаем на подходящие для этого модели. Стоимость — 500₽ на весь период.</div>
+                             </div>
+                             <div class="faq-item">
+                             <div class="faq-question" onclick="toggleFaq(this)"><span class="font-bold text-sm uppercase">Есть ли детские кресла?</span><i data-lucide="plus" class="faq-icon"></i></div>
+                            <div class="faq-answer">Да, устанавливаем на подходящие для этого модели. Стоимость — 500₽ на весь период.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- БЛОК: ЭЛЕКТРОСАМОКАТЫ -->
+        <section id="escooters-block" class="py-24 px-6 bg-white">
+            <div class="max-w-7xl mx-auto">
+                <h2 class="text-6xl font-black grotesk uppercase mb-16">Электросамокаты</h2>
+                <div class="flex flex-col lg:flex-row gap-12 items-center">
+                    <div class="lg:w-2/3 rounded-[3rem] overflow-hidden bg-zinc-100 aspect-video">
+                         <div><img src="electric_procat.webp" alt=" class="w-full h-full object-cover" alt="Прокат электроскутера в Судаке">
+                    </div>
+                    <div class="lg:w-1/3">
+                        <h3 class="text-4xl font-black uppercase grotesk mb-6">Ninebot Max G30</h3>
+                        <p class="text-zinc-500 mb-8 leading-relaxed">Лидер рынка. Запас хода примерно 40 км, зависит от выбранной скорости и угла уклона местности. Идеально для длинных прогулок вдоль побережья без лишних усилий.</p>
+                        <div class="space-y-4 mb-8">
+                            <div class="flex justify-between items-center pb-4 border-bottom border-zinc-100">
+                                <span class="font-bold uppercase text-xs">1 час</span>
+                                <span class="font-black text-xl">500₽</span>
+                            </div>
+                            <div class="flex justify-between items-center pb-4 border-bottom border-zinc-100">
+                                <span class="font-bold uppercase text-xs">Сутки</span>
+                                <span class="font-black text-xl text-blue-600">2000₽</span>
+                            </div>
+                        </div>
+                        <div class="p-6 bg-zinc-50 rounded-2xl">
+                            <h4 class="text-xs font-black uppercase mb-2">Правила:</h4>
+                            <p class="text-[10px] text-zinc-400">Только 18+. Вес до 120 кг. Запрещено кататься вдвоем. Залог 5000₽.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- БЛОК: SUP (С ФОТОГРАФИЯМИ) -->
+        <section id="sup-block" class="py-24 px-6 bg-blue-50">
+            <div class="max-w-7xl mx-auto">
+                <h2 class="text-huge font-black grotesk uppercase mb-16 text-blue-600 opacity-20">SUP OCEAN</h2>
+                <h2 class="text-5xl font-black grotesk uppercase mb-12 relative -mt-32">Прокат SUP-бордов</h2>
+                
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-16">
+                    <!-- 1 -->
+                    <div class="bg-white p-6 rounded-3xl border border-blue-100 flex flex-col">
+                        <div class="aspect-square rounded-2xl overflow-hidden mb-4"><img src="https://images.unsplash.com/photo-1517176118179-65244ad0e59a?q=80&w=400" class="w-full h-full object-cover"></div>
+                        <h4 class="font-black uppercase mb-2">Universal 10.6</h4>
+                        <p class="text-[10px] text-zinc-400 mb-4">Для новичков</p>
+                        <p class="font-black text-blue-600 mt-auto">1000₽/час</p>
+                    </div>
+                    <!-- 2 -->
+                    <div class="bg-white p-6 rounded-3xl border border-blue-100 flex flex-col">
+                        <div class="aspect-square rounded-2xl overflow-hidden mb-4"><img src="https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?q=80&w=400" class="w-full h-full object-cover"></div>
+                        <h4 class="font-black uppercase mb-2">Touring 12.6</h4>
+                        <p class="text-[10px] text-zinc-400 mb-4">Для заплывов</p>
+                        <p class="font-black text-blue-600 mt-auto">1000₽/час</p>
+                    </div>
+                    <!-- 3 -->
+                    <div class="bg-white p-6 rounded-3xl border border-blue-100 flex flex-col">
+                        <div class="aspect-square rounded-2xl overflow-hidden mb-4"><img src="https://images.unsplash.com/photo-1500353391642-d81b2f972196?q=80&w=400" class="w-full h-full object-cover"></div>
+                        <h4 class="font-black uppercase mb-2">Family Board</h4>
+                        <p class="text-[10px] text-zinc-400 mb-4">Двое взрослых</p>
+                        <p class="font-black text-blue-600 mt-auto">1000₽/сутки</p>
+                    </div>
+                    <!-- 4 -->
+                    <div class="bg-white p-6 rounded-3xl border border-blue-100 flex flex-col">
+                        <div class="aspect-square rounded-2xl overflow-hidden mb-4"><img src="https://images.unsplash.com/photo-1506126613408-eca07ce68773?q=80&w=400" class="w-full h-full object-cover"></div>
+                        <h4 class="font-black uppercase mb-2">Yoga Pro</h4>
+                        <p class="text-[10px] text-zinc-400 mb-4">Устойчивый</p>
+                        <p class="font-black text-blue-600 mt-auto">1000₽/сутки</p>
+                    </div>
+                    <!-- 5 -->
+                    <div class="bg-white p-6 rounded-3xl border border-blue-100 flex flex-col">
+                        <div class="aspect-square rounded-2xl overflow-hidden mb-4"><img src="https://images.unsplash.com/photo-1517176118179-65244ad0e59a?q=80&w=400" class="w-full h-full object-cover"></div>
+                        <h4 class="font-black uppercase mb-2">Sport Elite</h4>
+                        <p class="text-[10px] text-zinc-400 mb-4">Узкий и быстрый</p>
+                        <p class="font-black text-blue-600 mt-auto">1000₽/сутки</p>
+                    </div>
+                    <!-- 6 -->
+                    <div class="bg-white p-6 rounded-3xl border border-blue-100 flex flex-col">
+                        <div class="aspect-square rounded-2xl overflow-hidden mb-4"><img src="https://images.unsplash.com/photo-1517176118179-65244ad0e59a?q=80&w=400" class="w-full h-full object-cover"></div>
+                        <h4 class="font-black uppercase mb-2">Kids SUP</h4>
+                        <p class="text-[10px] text-zinc-400 mb-4">Для детей</p>
+                        <p class="font-black text-blue-600 mt-auto">1000₽/сутки</p>
+                    </div>
+                    <!-- 7 -->
+                    <div class="bg-white p-6 rounded-3xl border border-blue-100 flex flex-col">
+                        <div class="aspect-square rounded-2xl overflow-hidden mb-4"><img src="https://images.unsplash.com/photo-1517176118179-65244ad0e59a?q=80&w=400" class="w-full h-full object-cover"></div>
+                        <h4 class="font-black uppercase mb-2">Wind SUP</h4>
+                        <p class="text-[10px] text-zinc-400 mb-4">С парусом</p>
+                        <p class="font-black text-blue-600 mt-auto">1000₽/сутки</p>
+                    </div>
+                    <!-- 8 -->
+                    <div class="bg-white p-6 rounded-3xl border border-blue-100 flex flex-col">
+                        <div class="aspect-square rounded-2xl overflow-hidden mb-4"><img src="https://images.unsplash.com/photo-1517176118179-65244ad0e59a?q=80&w=400" class="w-full h-full object-cover"></div>
+                        <h4 class="font-black uppercase mb-2">Sunset Edition</h4>
+                        <p class="text-[10px] text-zinc-400 mb-4">Для фотосессий</p>
+                        <p class="font-black text-blue-600 mt-auto">1000₽/сутки</p>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+                    <div class="space-y-6">
+                        <h4 class="text-xl font-black uppercase grotesk">Условия SUP-проката</h4>
+                        <div class="flex gap-4 flex-wrap">
+                            <span class="flex items-center gap-2 text-xs font-bold uppercase bg-white px-4 py-2 rounded-xl"><i data-lucide="shield" class="w-4 h-4 text-blue-600"></i> Жилет в комплекте</span>
+                            <span class="flex items-center gap-2 text-xs font-bold uppercase bg-white px-4 py-2 rounded-xl"><i data-lucide="smartphone" class="w-4 h-4 text-blue-600"></i> Гермомешок для телефона</span>
+                        </div>
+                        <p class="text-sm text-zinc-500">Бесплатный инструктаж 5-10 минут на пункте проката.</p>
+                    </div>
+                    <div class="space-y-2">
+                        <div class="faq-item">
+                            <div class="faq-question" onclick="toggleFaq(this)"><span class="font-bold uppercase text-xs">Можно ли брать сап на рассвет?</span><i data-lucide="plus" class="faq-icon"></i></div>
+                            <div class="faq-answer">Да, по предварительной брони с вечера. Это самое популярное время для катания.</div>
+                            </div>
+                            <div class="faq-item">
+                            <div class="faq-question" onclick="toggleFaq(this)"><span class="font-bold uppercase text-xs">Выдаете в накачанном состоянии?</span><i data-lucide="plus" class="faq-icon"></i></div>
+                            <div class="faq-answer">Да, но можем и сдуть, если нужно будет транспортировать в другое место. Выдадим сумку и механический насос для удобства.</div>
+                                </div>
+                                <div class="faq-item">
+                             <div class="faq-question" onclick="toggleFaq(this)"><span class="font-bold uppercase text-xs">Есть ли доставка?</span><i data-lucide="plus" class="faq-icon"></i></div>
+                            <div class="faq-answer">Нет, вам нужно посетить наш прокат.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <!-- SEO HOME -->
         <article class="seo-section bg-zinc-50">
-
-    <h1>Аренда и прокат транспорта в Судаке — скутеры, велосипеды, электросамокаты, SUP-борды</h1>
-
-    <p>
-        Планируете провести отпуск в Крыму активно и без ограничений?
-        <strong>Аренда и прокат транспорта в Судаке</strong> — оптимальное решение
-        для туристов, которые ценят свободу передвижения, комфорт и собственный маршрут.
-    </p>
-
-    <p>
-        Пункт <strong>«Прокат Судак»</strong> на
-        <em>улице Юбилейная 3/4</em> предлагает современный парк техники сезона
-        <strong>2026 года</strong>: скутеры, велосипеды, SUP-борды и электросамокаты 
-        для индивидуальных поездок по городу и за его пределами.
-    </p>
-
-    <p>
-        Судак — это не только пляжи, но и уникальные природные маршруты,
-        смотровые площадки, виноградники и исторические достопримечательности.
-        Забудьте о душном общественном транспорте, расписаниях и завышенных ценах на такси.
-    </p>
-
-    <p>
-        <strong>Прокат скутеров в Судаке</strong>, аренда велосипедов или SUP —
-        это возможность увидеть Крым в своем ритме, самостоятельно добраться
-        до <strong>АРТ Тавриды</strong>, <strong>Нового Света</strong> и
-        <strong>мыса Меганом</strong>, получив максимум впечатлений от отдыха.
-    </p>
-            </article>
+            <h1>Аренда и прокат транспорта в Судаке — скутеры, велосипеды, электросамокаты, SUP-борды</h1>
+            <p>Планируете провести отпуск в Крыму активно и без ограничений? <strong>Аренда и прокат транспорта в Судаке</strong> — оптимальное решение для туристов, которые ценят свободу передвижения, комфорт и собственный маршрут.</p>
+            <p>Пункт <strong>«Прокат Судак»</strong> на <em>улице Юбилейная 3/4</em> предлагает современный парк техники сезона <strong>2026 года</strong>: скутеры, велосипеды, SUP-борды и электросамокаты для индивидуальных поездок по городу и за его пределами.</p>
+            <p>Судак — это не только пляжи, но и уникальные природные маршруты. <strong>Прокат скутеров в Судаке</strong>, аренда велосипедов или SUP — это возможность увидеть Крым в своем ритме, самостоятельно добраться до <strong>АРТ Тавриды</strong>, <strong>Нового Света</strong> и <strong>мыса Меганом</strong>.</p>
+        </article>
     </div>
 
-    <!-- ВЕЛОСИПЕДЫ (VIEW) -->
+    <!-- ВЕЛОСИПЕДЫ (VIEW - Оставлен для навигации из меню) -->
     <div id="view-bikes" class="view-section hidden-view">
         <div class="pt-32 pb-24 px-6 max-w-7xl mx-auto text-black">
             <button onclick="switchView('home')" class="mb-8 flex items-center gap-2 font-bold uppercase text-xs bg-zinc-100 px-4 py-2 rounded-full hover:bg-black hover:text-white transition-all"><i data-lucide="arrow-left" class="w-4 h-4"></i> Назад</button>
             <h1 class="text-huge font-black grotesk uppercase mb-16">Велопарк</h1>
-            
             <section class="grid grid-cols-1 md:grid-cols-2 gap-12 mb-32">
                 <div class="product-card flex flex-col lg:flex-row gap-8">
-                    <div class="lg:w-1/2 aspect-square rounded-2xl overflow-hidden"><img src="bicycle-sudak-arenda.webp" class="w-full h-full object-cover"></div>
+                    <div class="lg:w-1/2 aspect-square rounded-2xl overflow-hidden"><img src="https://images.unsplash.com/photo-1485965120184-e220f721d03e?q=80&w=400" class="w-full h-full object-cover"></div>
                     <div class="lg:w-1/2 flex flex-col justify-center text-left">
                         <h3 class="text-3xl font-black uppercase mb-4">Elite MTB 29"</h3>
                         <p class="text-zinc-500 mb-6 text-sm">Горный найнер для серьезных маршрутов. Дисковые тормоза и 24 скорости.</p>
@@ -235,7 +454,7 @@
                     </div>
                 </div>
                 <div class="product-card flex flex-col lg:flex-row gap-8">
-                    <div class="lg:w-1/2 aspect-square rounded-2xl overflow-hidden"><img src="bike_arenda_sudak.webp" class="w-full h-full object-cover"></div>
+                    <div class="lg:w-1/2 aspect-square rounded-2xl overflow-hidden"><img src="https://images.unsplash.com/photo-1576435728678-68d0fbf94e91?q=80&w=400" class="w-full h-full object-cover"></div>
                     <div class="lg:w-1/2 flex flex-col justify-center text-left">
                         <h3 class="text-3xl font-black uppercase mb-4">City Cruise 26"</h3>
                         <p class="text-zinc-500 mb-6 text-sm">Комфортный вариант для набережной и Кипарисовой аллеи.</p>
@@ -243,154 +462,15 @@
                     </div>
                 </div>
             </section>
-
-            <section class="mb-32">
-                <h2 class="text-4xl font-black grotesk uppercase mb-12">Маршруты</h2>
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-left">
-                    <div class="route-card">
-                        <img src="bike_arenda_sudak.webp" class="w-full h-48 object-cover">
-                        <div class="p-6">
-                            <h4 class="font-bold uppercase mb-2">Тропа Алчак</h4>
-                            <p class="text-xs text-zinc-500 mb-4">Легкий маршрут вокруг горы с видами на крепость.</p>
-                            <a href="https://yandex.ru/maps/?rtext=~44.839446,34.990425" target="_blank" class="flex items-center justify-center gap-2 w-full bg-black text-white py-3 rounded-xl font-bold uppercase text-[10px] hover:bg-blue-600 transition-all mb-4">Навигация <i data-lucide="navigation"></i></a>
-                            <div class="route-map-overlay"><div class="absolute inset-0 flex items-center justify-center text-red-500 font-bold text-[8px]">СХЕМА КАРТЫ</div></div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <article class="seo-section !px-0 text-left">
-                <h2>Прокат горных велосипедов в Судаке 2026: активный отдых</h2>
-                <p>Исследуйте <strong>Судак на велосипеде</strong>! Мы предлагаем качественные горные модели для поездок на <em>гору Алчак</em> и к бухте <em>Капсель</em>. Велосипед — это лучший способ ощутить масштаб Крымской природы.</p>
-            </article>
-
-            <section class="max-w-3xl mb-32"><h2 class="text-4xl font-black grotesk uppercase mb-12 text-left">FAQ</h2><div class="faq-item"><div class="faq-question" onclick="toggleFaq(this)"><h3 class="font-bold uppercase">Нужен ли залог?</h3><i data-lucide="plus" class="faq-icon"></i></div><div class="faq-answer">Да, залог 2000₽ за велосипед либо документ (права, СТС).</div></div></section>
         </div>
     </div>
 
-    <!-- СКУТЕРЫ (VIEW) -->
-    <div id="view-scooters" class="view-section hidden-view">
-        <div class="pt-32 pb-24 px-6 max-w-7xl mx-auto text-black text-center md:text-left">
-            <button onclick="switchView('home')" class="mb-8 flex items-center gap-2 font-bold uppercase text-xs bg-zinc-100 px-4 py-2 rounded-full hover:bg-black hover:text-white transition-all"><i data-lucide="arrow-left" class="w-4 h-4"></i> Назад</button>
-            <h1 class="text-huge font-black grotesk uppercase mb-16">Скутеры Vento</h1>
-
-            <section class="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-32 text-left text-black">
-                <div class="product-card flex flex-col gap-8">
-                    <div class="aspect-video rounded-2xl overflow-hidden bg-zinc-100 border-4 border-white shadow-lg"><img src="sup_otdix_krim.webp" class="w-full h-full object-cover"></div>
-                    <div>
-                        <h3 class="text-4xl font-black uppercase mb-4 text-blue-600">VMC Vento Retro</h3>
-                        <p class="text-zinc-600 mb-8 leading-relaxed">Итальянский стиль. Идеален для фотосессий и романтических поездок вдоль моря и судакских окрестностей. Мягкое сиденье и стильный кофр.</p>
-                        <div class="grid grid-cols-3 gap-6 mb-8 text-left">
-                            <div><p class="spec-label">Объем</p><p class="spec-value">50 / 125 cc</p></div>
-                            <div><p class="spec-label">Права</p><p class="spec-value">Кат. М / B</p></div>
-                            <div><p class="spec-label">Пассажир</p><p class="spec-value">Да</p></div>
-                        </div>
-                        <span class="text-3xl font-black">2500₽ / сутки</span>
-                    </div>
-                </div>
-                <div class="product-card flex flex-col gap-8 text-left text-black">
-                    <div class="aspect-video rounded-2xl overflow-hidden bg-zinc-100 border-4 border-white shadow-lg"><img src="transport_arenda_sudak.webp" class="w-full h-full object-cover"></div>
-                    <div>
-                        <h3 class="text-4xl font-black uppercase mb-4">Vento Smart 3</h3>
-                        <p class="text-zinc-600 mb-8 leading-relaxed">Современный маневренный скутер с LED оптикой. Отлично подходит для поездок по побережью Крыма.</p>
-                        <div class="grid grid-cols-3 gap-6 mb-8 text-left text-black">
-                            <div><p class="spec-label">Объем</p><p class="spec-value">170 cc</p></div>
-                            <div><p class="spec-label">Тормоза</p><p class="spec-value">Дисковые</p></div>
-                            <div><p class="spec-label">Кат.</p><p class="spec-value">М / B</p></div>
-                        </div>
-                        <span class="text-3xl font-black">3500₽ / сутки</span>
-                    </div>
-                </div>
-            </section>
-
-            <section class="mb-32 text-left">
-                <h2 class="text-4xl font-black grotesk uppercase mb-12">Маршруты</h2>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                    <div class="route-card">
-                        <div class="p-6">
-                            <h4 class="font-bold uppercase text-lg mb-2">Маяк Меганом</h4>
-                            <p class="text-sm text-zinc-500 mb-6">15 минут от Судака по асфальту. Лучшие закаты Крыма.</p>
-                            <a href="https://yandex.ru/maps/?rtext=~44.793611,35.080556" target="_blank" class="flex items-center justify-center gap-2 w-full bg-black text-white py-3 rounded-xl font-bold uppercase text-[10px] hover:bg-blue-600 transition-all mb-4">Навигация <i data-lucide="navigation"></i></a>
-                            <div class="route-map-overlay"><div class="absolute inset-0 flex items-center justify-center text-red-600 font-bold text-[8px]">ПУТЬ К МАЯКУ</div></div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <article class="seo-section !px-0 text-left text-black">
-                <h2>Аренда скутеров в Судаке 2026: Vento Retro и Smart 3</h2>
-                <p>Хотите объехать <strong>Судак и Меганом</strong>? Аренда скутера 150сс — лучший вариант. Скутер <strong>Vento Retro</strong> подарит вам незабываемые эмоции и свободу передвижения без пробок на пути к <strong>АРТ Тавриде</strong>.</p>
-            </article>
-
-            <section class="max-w-3xl mb-32 text-left text-black"><h2 class="text-4xl font-black grotesk uppercase mb-12">FAQ: Скутеры</h2><div class="faq-item"><div class="faq-question" onclick="toggleFaq(this)"><h3 class="font-bold uppercase">Какие права?</h3><i data-lucide="plus" class="faq-icon"></i></div><div class="faq-answer">Для 50сс любая категория (M, B). Для 125сс — категория А. Залог 5000₽.</div></div></section>
-        </div>
-    </div>
-
-     <!-- SUP (VIEW)-->
-    <div id="view-sups" class="view-section hidden-view">
-        <div class="pt-32 pb-24 px-6 max-w-7xl mx-auto text-black text-center md:text-left">
-            <button onclick="switchView('home')" class="mb-8 flex items-center gap-2 font-bold uppercase text-xs bg-zinc-100 px-4 py-2 rounded-full hover:bg-black hover:text-white transition-all"><i data-lucide="arrow-left" class="w-4 h-4"></i> Назад</button>
-            <h1 class="text-huge font-black grotesk uppercase mb-16">Сапборды Funwater</h1>
-
-            <section class="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-32 text-left text-black">
-                <div class="product-card flex flex-col gap-8">
-                    <div class="aspect-video rounded-2xl overflow-hidden bg-zinc-100 border-4 border-white shadow-lg"><img src="sup_otdix_krim.webp" class="w-full h-full object-cover"></div>
-                    <div>
-                        <h3 class="text-4xl font-black uppercase mb-4 text-blue-600">VMC Vento Retro</h3>
-                        <p class="text-zinc-600 mb-8 leading-relaxed"> Идеален для фотосессий и активных походов по морю в судакской бухте. Мягкое сиденье и стильный кофр.</p>
-                        <div class="grid grid-cols-3 gap-6 mb-8 text-left">
-                            <div><p class="spec-label">Длина</p><p class="spec-value">50 / 330 cм</p></div>
-                            <div><p class="spec-label">Комплектация</p><p class="spec-value">Лодка, весло, страховочный лиш, водонепроницаемый чехол / B</p></div>
-                            <div><p class="spec-label">Грузоподьемность</p><p class="spec-value">150 кг</p></div>
-                        </div>
-                        <span class="text-3xl font-black">1000₽ / сутки</span>
-                    </div>
-                </div>
-                <div class="product-card flex flex-col gap-8 text-left text-black">
-                    <div class="aspect-video rounded-2xl overflow-hidden bg-zinc-100 border-4 border-white shadow-lg"><img src="transport_arenda_sudak.webp" class="w-full h-full object-cover"></div>
-                    <div>
-                        <h3 class="text-4xl font-black uppercase mb-4">Vento Smart 3</h3>
-                        <p class="text-zinc-600 mb-8 leading-relaxed">Яркий маневренный сапборд. Отлично подходит для похода вдвоем.</p>
-                        <div class="grid grid-cols-3 gap-6 mb-8 text-left text-black">
-                            <div><p class="spec-label">Длина</p><p class="spec-value">Лодка, весло, страховочный лиш, водонепроницаемый чехол  cc</p></div>
-                            <div><p class="spec-label">Комплектация</p><p class="spec-value">Дисковые</p></div>
-                            <div><p class="spec-label">Грузоподьемность</p><p class="spec-value">180 кг</p></div>
-                        </div>
-                        <span class="text-3xl font-black">1000₽ / сутки</span>
-                    </div>
-                </div>
-            </section>
-
-            <section class="mb-32 text-left">
-                <h2 class="text-4xl font-black grotesk uppercase mb-12">Маршруты</h2>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                    <div class="route-card">
-                        <div class="p-6">
-                            <h4 class="font-bold uppercase text-lg mb-2">Мыс Алчак</h4>
-                            <p class="text-sm text-zinc-500 mb-6">10 минут от берега по воде. Лучшие закаты Крыма.</p>
-                            <a href="https://yandex.ru/maps/?rtext=~44.793611,35.080556" target="_blank" class="flex items-center justify-center gap-2 w-full bg-black text-white py-3 rounded-xl font-bold uppercase text-[10px] hover:bg-blue-600 transition-all mb-4">Навигация <i data-lucide="navigation"></i></a>
-                            <div class="route-map-overlay"><div class="absolute inset-0 flex items-center justify-center text-red-600 font-bold text-[8px]">ПУТЬ К МЫСУ АЛЧАКУ</div></div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <article class="seo-section !px-0 text-left text-black">
-                <h2>Аренда скутеров в Судаке 2026: Vento Retro и Smart 3</h2>
-                <p>Хотите объехать <strong>Судак и Меганом</strong>? Аренда скутера 150сс — лучший вариант. Скутер <strong>Vento Retro</strong> подарит вам незабываемые эмоции и свободу передвижения без пробок на пути к <strong>АРТ Тавриде</strong>.</p>
-            </article>
-
-            <section class="max-w-3xl mb-32 text-left text-black"><h2 class="text-4xl font-black grotesk uppercase mb-12">FAQ: Скутеры</h2><div class="faq-item"><div class="faq-question" onclick="toggleFaq(this)"><h3 class="font-bold uppercase">Какие права?</h3><i data-lucide="plus" class="faq-icon"></i></div><div class="faq-answer">Для 50сс любая категория (M, B). Для 125сс — категория А. Залог 5000₽.</div></div></section>
-        </div>
-    </div>
-   <!-- ГЛОБАЛЬНАЯ ГАЛЕРЕЯ (ОБНОВЛЕННАЯ СИММЕТРИЯ) -->
+    <!-- ГЛОБАЛЬНАЯ ГАЛЕРЕЯ -->
     <section id="global-gallery" class="py-24 px-6 bg-zinc-900 overflow-hidden">
         <div class="max-w-7xl mx-auto">
             <h2 class="text-6xl font-black grotesk uppercase mb-16 text-white text-center">Атмосфера проката</h2>
-            
-            <!-- Сетка: неограниченное число фото, симметрично, адаптивно -->
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 inner-gallery">
-                <div><img src="arenda_sapa_sudak.webp" alt="Прокат Сапов"></div>
+                 <div><img src="arenda_sapa_sudak.webp" alt="Прокат Сапов"></div>
                 <div><img src="sup_otdix_krim.webp" alt="Йога на Сапах"></div>
                 <div><img src="sup_sudak4.webp" alt="Сапбординг"></div>
                 <div><img src="surfboard__sudak_prokat.webp" alt="Электросамокаты"></div>
@@ -410,29 +490,30 @@
             </div>
         </div>
     </section>
- <!-- ОТЗЫВЫ -->
-        <section id="reviews-section" class="py-24 px-6 bg-white text-black">
-            <div class="max-w-7xl mx-auto">
-                <div class="flex flex-col md:flex-row justify-between items-center mb-16 gap-6">
-                    <div>
-                        <h2 class="text-5xl font-black grotesk uppercase mb-2">Отзывы 2026</h2>
-                        <div class="flex items-center gap-2 text-zinc-400 font-bold uppercase text-[10px]">
-                            <img src="https://yastatic.net/s3/home/services/block/maps_new.svg" class="w-6 h-6" alt="Яндекс">
-                            Рейтинг 5.0 на Яндекс Картах
-                        </div>
+
+    <!-- ОТЗЫВЫ -->
+    <section id="reviews-section" class="py-24 px-6 bg-white text-black">
+        <div class="max-w-7xl mx-auto">
+            <div class="flex flex-col md:flex-row justify-between items-center mb-16 gap-6">
+                <div>
+                    <h2 class="text-5xl font-black grotesk uppercase mb-2">Отзывы 2026</h2>
+                    <div class="flex items-center gap-2 text-zinc-400 font-bold uppercase text-[10px]">
+                        <img src="https://yastatic.net/s3/home/services/block/maps_new.svg" class="w-6 h-6" alt="Яндекс">
+                        Рейтинг 5.0 на Яндекс Картах
                     </div>
-                    <a href="https://yandex.ru/maps/org/prokat_sudak/" target="_blank" class="bg-yellow-400 text-black px-8 py-4 rounded-2xl font-bold uppercase text-xs hover:bg-yellow-500 flex items-center gap-2">Написать в Яндекс <i data-lucide="external-link" class="w-4 h-4"></i></a>
                 </div>
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    <div class="review-card">
-                        <div class="flex gap-3 items-center mb-4 text-xs">
-                            <div class="w-10 h-10 bg-zinc-100 rounded-full flex items-center justify-center font-bold">АМ</div>
-                            <div><p class="font-bold">Алексей М.</p><p class="text-zinc-400">2 недели назад</p></div>
-                        </div>
-                        <div class="flex text-yellow-400 mb-4"><i data-lucide="star" class="w-3 h-3 fill-current"></i><i data-lucide="star" class="w-3 h-3 fill-current"></i><i data-lucide="star" class="w-3 h-3 fill-current"></i><i data-lucide="star" class="w-3 h-3 fill-current"></i><i data-lucide="star" class="w-3 h-3 fill-current"></i></div>
-                        <p class="text-sm text-zinc-600">"Брали скутеры Vento. Техника новая, всё объяснили, шлемы чистые. Меганом прекрасен!"</p>
+                <a href="https://yandex.ru/maps/org/prokat_sudak/" target="_blank" class="bg-yellow-400 text-black px-8 py-4 rounded-2xl font-bold uppercase text-xs hover:bg-yellow-500 flex items-center gap-2">Написать в Яндекс <i data-lucide="external-link" class="w-4 h-4"></i></a>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="review-card">
+                    <div class="flex gap-3 items-center mb-4 text-xs">
+                        <div class="w-10 h-10 bg-zinc-100 rounded-full flex items-center justify-center font-bold">АМ</div>
+                        <div><p class="font-bold">Алексей М.</p><p class="text-zinc-400">2 недели назад</p></div>
                     </div>
-                     <div class="review-card">
+                    <div class="flex text-yellow-400 mb-4"><i data-lucide="star" class="w-3 h-3 fill-current"></i><i data-lucide="star" class="w-3 h-3 fill-current"></i><i data-lucide="star" class="w-3 h-3 fill-current"></i><i data-lucide="star" class="w-3 h-3 fill-current"></i><i data-lucide="star" class="w-3 h-3 fill-current"></i></div>
+                    <p class="text-sm text-zinc-600">"Брали скутеры Vento. Техника новая, всё объяснили, шлемы чистые. Меганом прекрасен!"</p>
+                </div>
+                    <div class="review-card">
                         <div class="flex gap-3 items-center mb-4 text-xs">
                             <div class="w-10 h-10 bg-zinc-100 rounded-full flex items-center justify-center font-bold">АШ</div>
                             <div><p class="font-bold">Андрей Ш.</p><p class="text-zinc-400">август 2024</p></div>
@@ -452,6 +533,10 @@
                 </div>
             </div>
         </section>
+            </div>
+        </div>
+    </section>
+
     <!-- CONTACTS -->
     <section id="contacts" class="py-24 px-6 bg-zinc-100 border-t border-zinc-200 text-black">
         <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16">
@@ -464,9 +549,6 @@
                 <div class="flex flex-col sm:flex-row gap-4">
                     <a href="https://yandex.ru/maps/org/prokat_sudak/" target="_blank" class="inline-flex items-center justify-center gap-4 bg-black text-white px-10 py-5 rounded-2xl hover:bg-zinc-800 transition-all">
                         <i data-lucide="map-pin"></i><span class="font-bold grotesk uppercase tracking-tight">Открыть Карты</span>
-                    </a>
-                    <a href="https://yandex.ru/maps/?rtext=~44.851603,34.974558" target="_blank" class="inline-flex items-center justify-center gap-4 bg-blue-600 text-white px-10 py-5 rounded-2xl hover:bg-blue-700 transition-all shadow-lg">
-                        <i data-lucide="navigation"></i><span class="font-bold grotesk uppercase tracking-tight">Маршрут к нам</span>
                     </a>
                 </div>
             </div>
@@ -549,7 +631,8 @@
 
         function toggleMenu() { document.getElementById('mobile-menu-overlay').classList.toggle('open'); }
         function menuNavigate(v, a = null) {
-            toggleMenu(); switchView(v);
+            if (document.getElementById('mobile-menu-overlay').classList.contains('open')) toggleMenu();
+            switchView(v);
             if(a) setTimeout(() => {
                 const el = document.querySelector(a);
                 if (el) el.scrollIntoView({ behavior: 'smooth' });
@@ -557,12 +640,11 @@
         }
         function toggleFaq(el) { el.parentElement.classList.toggle('active'); }
 
-        // Start everything
         document.addEventListener('DOMContentLoaded', () => {
             init3D();
             if(typeof lucide !== 'undefined') lucide.createIcons();
             
-            // Intersection Observer
+            // Animation logic
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
@@ -572,31 +654,16 @@
                 });
             }, { threshold: 0.1 });
 
-            document.querySelectorAll('section, article, .review-card').forEach(el => {
+            document.querySelectorAll('section, article, .review-card, .product-card').forEach(el => {
                 el.style.opacity = "0";
                 el.style.transform = "translateY(20px)";
                 el.style.transition = "all 0.7s ease";
                 observer.observe(el);
             });
         });
-
-        window.addEventListener('resize', () => {
-            if(camera && renderer && sunContainer) {
-                camera.aspect = sunContainer.offsetWidth / sunContainer.offsetHeight;
-                camera.updateProjectionMatrix();
-                renderer.setSize(sunContainer.offsetWidth, sunContainer.offsetHeight);
-            }
-        });
     </script>
 </body>
 </html>
-
-
-
-
-
-
-
 
 
 
