@@ -2,10 +2,10 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
     <title>Прокат Судак 2026 — Скутеры, Велосипеды, SUP и Самокаты</title>
     
-    <!-- SEO Meta Tags -->
+     <!-- SEO Meta Tags -->
     <meta name="description" content="Аренда транспорта в Судаке 2026: скутеры Vento, горные велосипеды, SUP-борды и электросамокаты. Маршруты на Меганом и Новый Свет.">
     <meta name="keywords" content="прокат скутеров судак, аренда велосипедов судак, арт таврида транспорт, VMC Vento Retro, Vento Smart 3, сапборды судак, аренда транспорта судак, прокат транспорта судак, прокат скутеров судак,
 аренда скутера судак, скутер напрокат судак, аренда мопеда судак, прокат мопедов судак, vento retro судак, vento smart 3 судак, аренда велосипеда судак, прокат велосипедов судак, горные велосипеды судак, аренда электросамокатов судак,
@@ -13,14 +13,14 @@
 маршрут судак меганом, прокат транспорта меганом, маршрут судак новый свет, прокат транспорта новый свет, аренда транспорта крым, прокат транспорта крым, активный отдых судак, активный отдых крым,
 транспорт для туристов судак, летний прокат судак, аренда транспорта 2026 судак, лучший прокат судак, прокат без залога судак, прокат рядом со мной судак, юбилейная 3 4 судак прокат, прокат у моря судак">
     
-    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Preconnect -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700;900&family=Space+Grotesk:wght@300;500;700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://images.unsplash.com">
+    <link rel="preconnect" href="https://unpkg.com">
     
-    <!-- Внешние библиотеки -->
-    <script src="https://unpkg.com/lucide@latest"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.tailwindcss.com" defer></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700;900&family=Space+Grotesk:wght@300;500;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
     
     <style>
         :root {
@@ -28,17 +28,24 @@
             --dark: #121212;
             --light: #F5F5F7;
         }
+        html, body {
+            max-width: 100%;
+            overflow-x: hidden;
+            position: relative;
+        }
         body {
             font-family: 'Inter', sans-serif;
             background-color: var(--light);
             color: var(--dark);
             scroll-behavior: smooth;
+            -webkit-font-smoothing: antialiased;
         }
         .grotesk { font-family: 'Space Grotesk', sans-serif; }
         .text-huge {
             font-size: clamp(3rem, 15vw, 12rem);
             line-height: 0.85;
             letter-spacing: -0.05em;
+            word-wrap: break-word;
         }
         .tg-float {
             position: fixed;
@@ -54,7 +61,6 @@
         }
         .tg-float:hover { transform: scale(1.1) rotate(10deg); }
         
-        /* FAQ Styles */
         .faq-item { border-bottom: 1px solid #e5e7eb; }
         .faq-question { cursor: pointer; padding: 1.5rem 0; display: flex; justify-content: space-between; align-items: center; text-align: left; }
         .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.4s ease-out, padding 0.3s ease; color: #4b5563; }
@@ -62,85 +68,80 @@
         .faq-item.active .faq-icon { transform: rotate(45deg); }
         .faq-icon { transition: transform 0.3s ease; }
 
-        /* Views Logic */
-        .view-section { transition: opacity 0.4s ease; opacity: 1; position: relative; width: 100%; }
+        .view-section { transition: opacity 0.4s ease; opacity: 1; position: relative; width: 100%; overflow-x: hidden; }
         .hidden-view { display: none !important; opacity: 0; }
         
-        /* SEO Content */
         .seo-section { max-width: 64rem; margin: 0 auto; padding: 4rem 1.5rem; }
         .seo-section h2 { font-size: 2.25rem; font-weight: 900; text-transform: uppercase; margin-bottom: 1.5rem; font-family: 'Space Grotesk'; }
-        .seo-section h3 { font-size: 1.5rem; font-weight: 700; margin-top: 2.5rem; margin-bottom: 1rem; color: var(--accent); }
         .seo-section p { margin-bottom: 1.2rem; line-height: 1.8; color: #374151; font-size: 1.1rem; }
 
-        /* Review & Routes */
         .review-card { background: white; border-radius: 1.5rem; padding: 2rem; border: 1px solid #f0f0f0; }
         .route-card { border-radius: 2rem; background: white; overflow: hidden; border: 1px solid #eee; display: flex; flex-direction: column; height: 100%; transition: transform 0.3s ease; }
         .route-card:hover { transform: translateY(-8px); }
-        .route-map-overlay { position: relative; height: 160px; background: #f0f0f0; overflow: hidden; border-radius: 1rem; margin: 1rem; margin-top: auto; }
+        .product-card { background: white; border-radius: 2.5rem; padding: 2rem; border: 1px solid #eee; height: 100%; }
 
-        /* Mobile Menu */
         #mobile-menu-overlay { transition: transform 0.5s cubic-bezier(0.77,0.2,0.05,1.0); transform: translateY(-100%); }
         #mobile-menu-overlay.open { transform: translateY(0); }
-
-        .price-tag { background: var(--accent); color: white; padding: 4px 12px; border-radius: 99px; font-weight: 700; font-size: 0.875rem; }
         
-        #sun-canvas-container {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 0;
-            pointer-events: none;
-            background: linear-gradient(to bottom, #f0f4f8 0%, #ffffff 100%);
+        /* Hero background styling */
+        .hero-bg {
+            background-image: linear-gradient(to top, rgba(255,255,255,1) 0%, rgba(255,255,255,0.4) 50%, rgba(255,255,255,0.1) 100%), 
+                              url('https://images.unsplash.com/photo-1506126613408-eca07ce68773?q=80&w=1920');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
         }
+        @media (max-width: 768px) {
+            .hero-bg { background-attachment: scroll; }
+        }
+        
         .hero-content { position: relative; z-index: 10; }
-        .product-card { background: white; border-radius: 2.5rem; padding: 2rem; border: 1px solid #eee; height: 100%; }
+        .route-map-overlay { position: relative; height: 120px; background: #f0f0f0; overflow: hidden; border-radius: 1rem; margin-top: auto; }
     </style>
 </head>
-<body class="overflow-x-hidden">
+<body class="overflow-x-hidden w-full">
 
-    <!-- Кнопка Telegram -->
-    <a href="https://t.me/your_telegram_link" target="_blank" class="tg-float" title="Написать в Telegram">
-        <i data-lucide="send"></i>
+    <main>
+    <!-- Telegram Button -->
+    <a href="https://t.me/your_telegram_link" target="_blank" class="tg-float" aria-label="Написать нам в Telegram">
+        <i data-lucide="send" aria-hidden="true"></i>
     </a>
 
-    <!-- Мобильное меню -->
-    <div id="mobile-menu-overlay" class="fixed inset-0 z-[100] bg-white flex flex-col p-8 overflow-y-auto">
+    <!-- Mobile Menu -->
+    <div id="mobile-menu-overlay" class="fixed inset-0 z-[100] bg-white flex flex-col p-8 overflow-y-auto" aria-hidden="true">
         <div class="flex justify-between items-center mb-12">
             <span class="grotesk font-bold text-xl uppercase text-black">Меню проката</span>
-            <button onclick="toggleMenu()" class="p-2 bg-zinc-100 rounded-full"><i data-lucide="x"></i></button>
+            <button onclick="toggleMenu()" class="p-2 bg-zinc-100 rounded-full" aria-label="Закрыть меню"><i data-lucide="x"></i></button>
         </div>
         <nav class="flex flex-col gap-6 text-black text-center md:text-left">
-            <a href="javascript:void(0)" onclick="menuNavigate('home')" class="grotesk text-4xl font-black uppercase">Главная</a>
+            <a href="#view-home" onclick="menuNavigate('home')" class="grotesk text-4xl font-black uppercase">Главная</a>
             <div class="h-[1px] bg-zinc-100 my-2"></div>
-            <a href="javascript:void(0)" onclick="menuNavigate('bikes')" class="grotesk text-3xl font-black uppercase">Велосипеды</a>
-            <a href="javascript:void(0)" onclick="menuNavigate('scooters')" class="grotesk text-3xl font-black uppercase">Скутеры</a>
-            <a href="javascript:void(0)" onclick="menuNavigate('e-scooters')" class="grotesk text-3xl font-black uppercase">Самокаты</a>
-            <a href="javascript:void(0)" onclick="menuNavigate('sup')" class="grotesk text-3xl font-black uppercase">Сапборды</a>
+            <a href="#scooters-block" onclick="menuNavigate('home', '#scooters-block')" class="grotesk text-3xl font-black uppercase">Скутеры</a>
+            <a href="#bikes-block" onclick="menuNavigate('home', '#bikes-block')" class="grotesk text-3xl font-black uppercase">Велосипеды</a>
+            <a href="#escooters-block" onclick="menuNavigate('home', '#escooters-block')" class="grotesk text-3xl font-black uppercase">Самокаты</a>
+            <a href="#sup-block" onclick="menuNavigate('home', '#sup-block')" class="grotesk text-3xl font-black uppercase">Сапборды</a>
             <div class="h-[1px] bg-zinc-100 my-2"></div>
-            <a href="javascript:void(0)" onclick="menuNavigate('home', '#reviews-section')" class="grotesk text-4xl font-black uppercase">Отзывы</a>
-            <a href="javascript:void(0)" onclick="menuNavigate('home', '#contacts')" class="grotesk text-4xl font-black uppercase">Контакты</a>
+            <a href="#reviews-section" onclick="menuNavigate('home', '#reviews-section')" class="grotesk text-4xl font-black uppercase">Отзывы</a>
+            <a href="#contacts" onclick="menuNavigate('home', '#contacts')" class="grotesk text-4xl font-black uppercase">Контакты</a>
         </nav>
     </div>
 
-    <!-- Общая навигация -->
+    <!-- Navigation -->
     <nav class="fixed top-0 w-full z-50 mix-blend-difference text-white p-6 flex justify-between items-center">
-        <a href="javascript:void(0)" onclick="switchView('home')" class="grotesk font-bold text-2xl tracking-tighter uppercase">Судак / Прокат</a>
+        <a href="#view-home" onclick="switchView('home')" class="grotesk font-bold text-2xl tracking-tighter uppercase">Судак / Прокат</a>
         <div class="hidden md:flex gap-8 uppercase text-xs font-bold tracking-widest">
-            <a href="javascript:void(0)" onclick="switchView('home')" class="hover:opacity-50">Главная</a>
-            <a href="javascript:void(0)" onclick="menuNavigate('home', '#bikes-block')" class="hover:opacity-50">Вело</a>
-            <a href="javascript:void(0)" onclick="menuNavigate('home', '#scooters-block')" class="hover:opacity-50">Скутеры</a>
-            <a href="javascript:void(0)" onclick="menuNavigate('home', '#escooters-block')" class="hover:opacity-50">Самокаты</a>
-            <a href="javascript:void(0)" onclick="menuNavigate('home', '#sup-block')" class="hover:opacity-50">SUP</a>
+            <a href="#view-home" onclick="switchView('home')" class="hover:opacity-50">Главная</a>
+            <a href="#scooters-block" onclick="menuNavigate('home', '#scooters-block')" class="hover:opacity-50">Скутеры</a>
+            <a href="#bikes-block" onclick="menuNavigate('home', '#bikes-block')" class="hover:opacity-50">Вело</a>
+            <a href="#escooters-block" onclick="menuNavigate('home', '#escooters-block')" class="hover:opacity-50">Самокаты</a>
+            <a href="#sup-block" onclick="menuNavigate('home', '#sup-block')" class="hover:opacity-50">SUP</a>
         </div>
-        <div class="md:hidden cursor-pointer" onclick="toggleMenu()"><i data-lucide="menu"></i></div>
+        <div class="md:hidden cursor-pointer" onclick="toggleMenu()" aria-label="Открыть меню"><i data-lucide="menu"></i></div>
     </nav>
 
-    <!-- ГЛАВНАЯ СТРАНИЦА -->
+    <!-- HOME VIEW -->
     <div id="view-home" class="view-section">
-        <header class="min-h-screen flex flex-col justify-end p-6 pb-20 relative bg-white overflow-hidden">
-            <div id="sun-canvas-container"></div>
+        <header class="min-h-screen flex flex-col justify-end p-6 pb-20 relative overflow-hidden hero-bg">
             <div class="hero-content">
                 <div class="absolute top-20 right-6 opacity-10 hidden lg:block text-right text-zinc-900">
                     <p class="text-huge font-black grotesk uppercase leading-none">VELO<br>bike</p>
@@ -159,278 +160,307 @@
             </div>
         </header>
 
-        <!-- Галерея категорий (ЯКОРНЫЕ ССЫЛКИ) -->
-        <section id="gallery-main" class="py-24 px-6 bg-zinc-50">
+        <!-- Category Gallery -->
+        <section id="gallery-main" class="py-24 px-6 bg-zinc-50 overflow-hidden">
             <div class="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 text-black">
-                <!-- Скутеры -->
                 <div onclick="document.getElementById('scooters-block').scrollIntoView({behavior: 'smooth'})" class="bg-zinc-200 rounded-3xl overflow-hidden relative group aspect-[3/4] cursor-pointer">
-                       <img src="scooter_sudak_procat.webp" alt="Прокат скутеров">
+                    <img src="scooter_sudak_procat.webp" class="w-full h-full object-cover" alt="Аренда скутеров" fetchpriority="high">
                     <div class="absolute inset-0 bg-black/30 group-hover:bg-black/10 transition-all"></div>
-                    <div class="absolute bottom-6 left-6 text-white text-left"><p class="grotesk font-black text-2xl uppercase leading-none">Скутеры</p></div>
+                    <div class="absolute bottom-6 left-6 text-white"><p class="grotesk font-black text-2xl uppercase leading-none">Скутеры</p></div>
                 </div>
-                <!-- Велосипеды -->
                 <div onclick="document.getElementById('bikes-block').scrollIntoView({behavior: 'smooth'})" class="bg-zinc-200 rounded-3xl overflow-hidden relative group aspect-[3/4] cursor-pointer">
-                     <img src="procat_velosipeda_sudak.webp"> class="w-full h-full object-cover" alt="Прокат велосипедов">
+                    <img src="procat_velosipeda_sudak.webp" class="w-full h-full object-cover" alt="Прокат велосипедов" loading="lazy">
                     <div class="absolute inset-0 bg-black/30 group-hover:bg-black/10 transition-all"></div>
-                    <div class="absolute bottom-6 left-6 text-white text-left"><p class="grotesk font-black text-2xl uppercase leading-none">Велосипеды</p></div>
+                    <div class="absolute bottom-6 left-6 text-white"><p class="grotesk font-black text-2xl uppercase leading-none">Велосипеды</p></div>
                 </div>
-                <!-- SUP -->
                 <div onclick="document.getElementById('sup-block').scrollIntoView({behavior: 'smooth'})" class="bg-zinc-300 rounded-3xl overflow-hidden group relative aspect-[3/4] cursor-pointer">
-                  <img src="surfboard__sudak_prokat.webp"> class="w-full h-full object-cover" alt="Аренда SUP-бордов">
+                    <img src="surfboard__sudak_prokat.webp" width="600" height="800" class="w-full h-full object-cover" alt="Аренда SUP" loading="lazy">
                     <div class="absolute inset-0 bg-black/30 group-hover:bg-black/10 transition-all"></div>
-                    <div class="absolute bottom-6 left-6 text-white text-left"><p class="grotesk font-black text-2xl uppercase leading-none">Сапборды</p></div>
+                    <div class="absolute bottom-6 left-6 text-white"><p class="grotesk font-black text-2xl uppercase leading-none">Сапборды</p></div>
                 </div>
-                <!-- Самокаты -->
                 <div onclick="document.getElementById('escooters-block').scrollIntoView({behavior: 'smooth'})" class="bg-zinc-300 rounded-3xl overflow-hidden group relative aspect-[3/4] cursor-pointer">
-                          <img src="electric_scooter_procat.webp"> class="w-full h-full object-cover" alt="Электросамокаты">
+                    <img src="electric_scooter_procat.webp" height="800" class="w-full h-full object-cover" alt="Электросамокаты" loading="lazy">
                     <div class="absolute inset-0 bg-black/30 group-hover:bg-black/10 transition-all"></div>
-                    <div class="absolute bottom-6 left-6 text-white text-left"><p class="grotesk font-black text-2xl uppercase leading-none">Самокаты</p></div>
+                    <div class="absolute bottom-6 left-6 text-white"><p class="grotesk font-black text-2xl uppercase leading-none">Самокаты</p></div>
                 </div>
             </div>
         </section>
 
-        <!-- БЛОК: СКУТЕРЫ -->
-        <section id="scooters-block" class="py-24 px-6 bg-white">
+        <!-- SCOOTERS BLOCK -->
+        <section id="scooters-block" class="py-24 px-6 bg-white overflow-hidden text-black">
             <div class="max-w-7xl mx-auto">
-                <h2 class="text-6xl font-black grotesk uppercase mb-16">Скутеры 2026</h2>
+                <h2 class="text-6xl font-black grotesk uppercase mb-16">Скутеры Vento</h2>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-12 mb-16">
-                    <div class="product-card flex flex-col gap-6">
+                    <article class="product-card flex flex-col gap-6">
                         <div class="aspect-video rounded-3xl overflow-hidden bg-zinc-100">
-                           <img src="crenths_procat.webp" class="w-full h-full object-cover" alt="Vento Retro">
+                            <img src="crenths_procat.webp" width="800" height="450" class="w-full h-full object-cover" alt="VMC Vento Retro" loading="lazy">
                         </div>
-                        <h3 class="text-3xl font-black uppercase grotesk">VMC Vento Retro</h3>
+                        <h3 class="text-3xl font-black uppercase grotesk text-blue-600">VMC Vento Retro</h3>
                         <p class="text-zinc-500">Итальянская классика для стильных прогулок по окрестностям Судака. Идеален для фотосессий.</p>
-                        <div class="flex justify-between items-center mt-auto">
-                            <span class="text-2xl font-black text-blue-600">2500₽ / сутки</span>
+                        <div class="grid grid-cols-3 gap-4 text-xs font-bold uppercase mb-4">
+                            <div><p class="opacity-40">Объем</p><p>125 cc</p></div>
+                            <div><p class="opacity-40">Права</p><p>М / B</p></div>
+                            <div><p class="opacity-40">Места</p><p>2 чел</p></div>
                         </div>
-                    </div>
-                    <div class="product-card flex flex-col gap-6">
+                        <p class="text-2xl font-black">2500₽ / сутки</p>
+                    </article>
+                    <article class="product-card flex flex-col gap-6">
                         <div class="aspect-video rounded-3xl overflow-hidden bg-zinc-100">
-                            <img src="transport_arenda_sudak.webp" class="w-full h-full object-cover" alt="Vento Smart 3">
+                            <img src="transport_arenda_sudak.webp" width="800" height="450" class="w-full h-full object-cover" alt="Vento Smart 3" loading="lazy">
                         </div>
-                        <h3 class="text-3xl font-black uppercase grotesk">Vento Smart 3</h3>
+                        <h3 class="text-3xl font-black uppercase grotesk text-blue-600">Vento Smart 3</h3>
                         <p class="text-zinc-500">Мощный и современный скутер для поездок в любую точку Крыма. Идеален для поездки вдвоем.</p>
-                        <div class="flex justify-between items-center mt-auto">
-                            <span class="text-2xl font-black text-blue-600">3500₽ / сутки</span>
+                        <div class="grid grid-cols-3 gap-4 text-xs font-bold uppercase mb-4">
+                            <div><p class="opacity-40">Объем</p><p>170 cc</p></div>
+                            <div><p class="opacity-40">Тормоза</p><p>Диск</p></div>
+                            <div><p class="opacity-40">Кат.</p><p>М / B</p></div>
                         </div>
-                    </div>
+                        <p class="text-2xl font-black">3500₽ / сутки</p>
+                    </article>
                 </div>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-12 bg-zinc-50 p-12 rounded-[3rem]">
+                <div class="bg-zinc-50 p-8 rounded-[2.5rem] grid grid-cols-1 lg:grid-cols-2 gap-12">
                     <div>
-                        <h4 class="text-xl font-black uppercase grotesk mb-6">Условия аренды скутеров</h4>
-                        <ul class="space-y-4 text-sm font-medium">
-                            <li class="flex items-start gap-3"><i data-lucide="check-circle" class="w-5 h-5 text-blue-600"></i> Паспорт РФ и возраст от 18 лет</li>
-                            <li class="flex items-start gap-3"><i data-lucide="check-circle" class="w-5 h-5 text-blue-600"></i> Права категории М, А или В</li>
-                            <li class="flex items-start gap-3"><i data-lucide="check-circle" class="w-5 h-5 text-blue-600"></i> Залог: 10 000₽ + оригинал документа</li>
-                            <li class="flex items-start gap-3"><i data-lucide="check-circle" class="w-5 h-5 text-blue-600"></i> Шлемы выдаем бесплатно</li>
+                        <h4 class="font-black uppercase mb-6">Условия аренды скутеров</h4>
+                        <ul class="space-y-3 text-sm">
+                            <li>• Паспорт РФ и возраст 18+</li>
+                            <li>• Права категории М, А или В</li>
+                            <li>• Залог: 10000₽ + оригинал документа</li>
+                            <li>• Шлем предоставляется бесплатно</li>
                         </ul>
                     </div>
-                    <div>
-                        <h4 class="text-xl font-black uppercase grotesk mb-6">FAQ</h4>
+                    <div class="space-y-4">
                         <div class="faq-item">
-                            <div class="faq-question" onclick="toggleFaq(this)"><span class="font-bold">Нужно ли заправлять скутер?</span><i data-lucide="plus" class="faq-icon"></i></div>
-                            <div class="faq-answer">Скутер выдается чистым и с полным баком. Вернуть нужно в таком же состоянии.</div>
+                            <div class="faq-question" onclick="toggleFaq(this)"><span class="font-bold">Нужно ли заправлять?</span><i data-lucide="plus" class="faq-icon"></i></div>
+                            <div class="faq-answer">Скутер выдается с полным баком, вернуть необходимо также заправленным.</div>
                         </div>
                         <div class="faq-item">
-                            <div class="faq-question" onclick="toggleFaq(this)"><span class="font-bold">Можно ли ездить вдвоем?</span><i data-lucide="plus" class="faq-icon"></i></div>
-                            <div class="faq-answer">Да, все наши скутеры двухместные и оборудованы подножками для пассажира.</div>
+                            <div class="faq-question" onclick="toggleFaq(this)"><span class="font-bold">Куда можно доехать?</span><i data-lucide="plus" class="faq-icon"></i></div>
+                            <div class="faq-answer">Разрешены поездки по всему Крыму: Новый Свет, Меганом, Солнечная Долина.</div>
                         </div>
-                         <div class="faq-item">
+                        <div class="faq-item">
                             <div class="faq-question" onclick="toggleFaq(this)"><span class="font-bold">Нужен ли опыт вождения?</span><i data-lucide="plus" class="faq-icon"></i></div>
-                            <div class="faq-answer">Да, мы не выдаем скутеры если человек ни разу не управлял мототехникой.</div>
+                            <div class="faq-answer">Да — для вашей безопасности мы выдаём скутеры только тем, у кого есть опыт управления мототехникой.</div>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- БЛОК: ВЕЛОСИПЕДЫ -->
-        <section id="bikes-block" class="py-24 px-6 bg-zinc-50">
-            <div class="max-w-7xl mx-auto text-center">
+        <!-- BIKES BLOCK -->
+        <section id="bikes-block" class="py-24 px-6 bg-zinc-50 overflow-hidden text-black text-center">
+            <div class="max-w-7xl mx-auto">
                 <h2 class="text-6xl font-black grotesk uppercase mb-16">Велосипеды</h2>
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6 mb-16">
-                    <!-- Bike 1 -->
                     <div class="bg-white p-6 rounded-[2.5rem] flex flex-col items-center">
-                        <div class="w-full aspect-square rounded-2xl overflow-hidden mb-6"><img src="velosiped_siniy.webp" class="w-full h-full object-cover"></div>
-                        <h3 class="font-black uppercase text-sm mb-2">Timetry 26"</h3>
-                        <p class="text-xs text-zinc-400 mb-4">Для профи</p>
+                        <div class="w-full aspect-square rounded-2xl overflow-hidden mb-6"><img src="arenda_velosipeda_sudak.webp" width="400" height="400" class="w-full h-full object-cover" alt="Elite MTB 29" loading="lazy"></div>
+                        <h3 class="font-black uppercase text-sm mb-2">Big 29"</h3>
+                        <p class="text-xs text-zinc-400 mb-4 italic">Для профи</p>
                         <p class="font-black text-blue-600">500₽/час</p>
                     </div>
-                    <!-- Bike 2 -->
                     <div class="bg-white p-6 rounded-[2.5rem] flex flex-col items-center">
-                        <div class="w-full aspect-square rounded-2xl overflow-hidden mb-6"><img src="versalsudak.webp" class="w-full h-full object-cover"></div>
+                        <div class="w-full aspect-square rounded-2xl overflow-hidden mb-6"><img src="https://images.unsplash.com/photo-1576435728678-68d0fbf94e91?q=80&w=400" width="400" height="400" class="w-full h-full object-cover" alt="Mountain 27.5" loading="lazy"></div>
                         <h3 class="font-black uppercase text-sm mb-2">Mountain 27.5"</h3>
-                        <p class="text-xs text-zinc-400 mb-4">Универсальный</p>
+                        <p class="text-xs text-zinc-400 mb-4 italic">Универсальный</p>
                         <p class="font-black text-blue-600">500₽/час</p>
                     </div>
-                    <!-- Bike 3 -->
                     <div class="bg-white p-6 rounded-[2.5rem] flex flex-col items-center">
-                        <div class="w-full aspect-square rounded-2xl overflow-hidden mb-6"><img src="bike_sudak.webp" class="w-full h-full object-cover"></div>
+                        <div class="w-full aspect-square rounded-2xl overflow-hidden mb-6"><img src="https://images.unsplash.com/photo-1532298229144-0ee0c97d158b?q=80&w=400" width="400" height="400" class="w-full h-full object-cover" alt="City Cruise 26" loading="lazy"></div>
                         <h3 class="font-black uppercase text-sm mb-2">City Cruise 26"</h3>
-                        <p class="text-xs text-zinc-400 mb-4">Городской</p>
+                        <p class="text-xs text-zinc-400 mb-4 italic">Городской</p>
                         <p class="font-black text-blue-600">500₽/час</p>
                     </div>
-                    <!-- Bike 4 -->
                     <div class="bg-white p-6 rounded-[2.5rem] flex flex-col items-center">
-                        <div class="w-full aspect-square rounded-2xl overflow-hidden mb-6"><img src="arenda_velosipeda_sudak.webp"></div>
-                        <h3 class="font-black uppercase text-sm mb-2">Big 29</h3>
-                        <p class="text-xs text-zinc-400 mb-4">Большие колеса</p>
+                        <div class="w-full aspect-square rounded-2xl overflow-hidden mb-6"><img src="https://images.unsplash.com/photo-1507035895480-2b3156c31fc8?q=80&w=400" width="400" height="400" class="w-full h-full object-cover" alt="Lady Style" loading="lazy"></div>
+                        <h3 class="font-black uppercase text-sm mb-2">Lady Style</h3>
+                        <p class="text-xs text-zinc-400 mb-4 italic">С корзиной</p>
                         <p class="font-black text-blue-600">500₽/час</p>
                     </div>
-                    <!-- Bike 5 -->
                     <div class="bg-white p-6 rounded-[2.5rem] flex flex-col items-center">
-                        <div class="w-full aspect-square rounded-2xl overflow-hidden mb-6"><img src="velo_krin26.webp" class="w-full h-full object-cover"></div>
-                        <h3 class="font-black uppercase text-sm mb-2 text-blue-600">Junior 20"</h3>
-                        <p class="text-xs text-zinc-400 mb-4">Для детей</p>
-                        <p class="font-black text-blue-600">500₽/час</p>
+                        <div class="w-full aspect-square rounded-2xl overflow-hidden mb-6"><img src="https://images.unsplash.com/photo-1593450974665-985c57b7f941?q=80&w=400" width="400" height="400" class="w-full h-full object-cover" alt="Junior 24" loading="lazy"></div>
+                        <h3 class="font-black uppercase text-sm mb-2 text-blue-600">Junior 24"</h3>
+                        <p class="text-xs text-zinc-400 mb-4 italic">Для подростков</p>
+                        <p class="font-black text-blue-600">250₽/час</p>
                     </div>
                 </div>
-                <div class="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 text-left">
-                    <div class="bg-white p-8 rounded-3xl">
-                        <h4 class="font-black uppercase mb-4">Условия проката</h4>
-                        <p class="text-sm text-zinc-500 mb-4">Залог: 5000₽ или оригинал документа (права/СТС). В стоимость входит противоугонный замок.</p>
-                        <div class="flex gap-4">
-                            <span class="text-[10px] bg-zinc-100 px-3 py-1 rounded-full font-bold uppercase">Обслужено 2026</span>
-                            <span class="text-[10px] bg-zinc-100 px-3 py-1 rounded-full font-bold uppercase">Чистые шлемы</span>
-                        </div>
-                    </div>
-                    <div class="space-y-2">
-                        <div class="faq-item">
-                            <div class="faq-question" onclick="toggleFaq(this)"><span class="font-bold text-sm uppercase">Есть ли детские кресла?</span><i data-lucide="plus" class="faq-icon"></i></div>
-                            <div class="faq-answer">Да, устанавливаем на подходящие для этого модели. Стоимость — 500₽ на весь период.</div>
-                             </div>
-                             <div class="faq-item">
-                             <div class="faq-question" onclick="toggleFaq(this)"><span class="font-bold text-sm uppercase">Есть ли детские кресла?</span><i data-lucide="plus" class="faq-icon"></i></div>
-                            <div class="faq-answer">Да, устанавливаем на подходящие для этого модели. Стоимость — 500₽ на весь период.</div>
-                        </div>
+                <div class="max-w-3xl mx-auto text-left space-y-4">
+                    <div class="faq-item">
+                        <div class="faq-question" onclick="toggleFaq(this)"><span class="font-bold uppercase text-xs">Нужен ли залог за велосипед?</span><i data-lucide="plus" class="faq-icon"></i></div>
+                        <div class="faq-answer">Залог — 2000₽ или документ (права/СТС). В стоимость включен замок и ремкомплект.</div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- БЛОК: ЭЛЕКТРОСАМОКАТЫ -->
-        <section id="escooters-block" class="py-24 px-6 bg-white">
+        <!-- E-SCOOTERS BLOCK -->
+        <section id="escooters-block" class="py-24 px-6 bg-white overflow-hidden text-black">
             <div class="max-w-7xl mx-auto">
-                <h2 class="text-6xl font-black grotesk uppercase mb-16">Электросамокаты</h2>
+                <h2 class="text-6xl font-black grotesk uppercase mb-16">Самокаты</h2>
                 <div class="flex flex-col lg:flex-row gap-12 items-center">
                     <div class="lg:w-2/3 rounded-[3rem] overflow-hidden bg-zinc-100 aspect-video">
-                         <div><img src="procat_krim_sudak.webp" alt=" class="w-full h-full object-cover" alt="Прокат электроскутера в Судаке">
+                        <img src="https://images.unsplash.com/photo-1597075095400-348259461168?q=80&w=1200" width="1200" height="675" class="w-full h-full object-cover" alt="Ninebot Max" loading="lazy">
                     </div>
                     <div class="lg:w-1/3">
                         <h3 class="text-4xl font-black uppercase grotesk mb-6">Ninebot Max G30</h3>
-                        <p class="text-zinc-500 mb-8 leading-relaxed">Лидер рынка. Запас хода примерно 40 км, зависит от выбранной скорости и угла уклона местности. Идеально для длинных прогулок вдоль побережья без лишних усилий.</p>
+                        <p class="text-zinc-500 mb-8 leading-relaxed">Лидер рынка. Запас хода 65 км. Идеально для длинных прогулок вдоль побережья без лишних усилий.</p>
                         <div class="space-y-4 mb-8">
-                            <div class="flex justify-between items-center pb-4 border-bottom border-zinc-100">
+                            <div class="flex justify-between items-center pb-4 border-b border-zinc-100">
                                 <span class="font-bold uppercase text-xs">1 час</span>
                                 <span class="font-black text-xl">500₽</span>
                             </div>
-                            <div class="flex justify-between items-center pb-4 border-bottom border-zinc-100">
+                            <div class="flex justify-between items-center pb-4 border-b border-zinc-100">
                                 <span class="font-bold uppercase text-xs">Сутки</span>
                                 <span class="font-black text-xl text-blue-600">2000₽</span>
                             </div>
                         </div>
-                        <div class="p-6 bg-zinc-50 rounded-2xl">
-                            <h4 class="text-xs font-black uppercase mb-2">Правила:</h4>
-                            <p class="text-[10px] text-zinc-400">Только 18+. Вес до 120 кг. Запрещено кататься вдвоем. Залог 5000₽.</p>
-                        </div>
+                        <p class="text-[10px] text-zinc-400 uppercase font-bold tracking-widest">Залог 5000₽ или паспорт</p>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- БЛОК: SUP (С ФОТОГРАФИЯМИ) -->
-        <section id="sup-block" class="py-24 px-6 bg-blue-50">
+        <!-- SUP BLOCK -->
+        <section id="sup-block" class="py-24 px-6 bg-blue-50 overflow-hidden text-black">
             <div class="max-w-7xl mx-auto">
-                <h2 class="text-huge font-black grotesk uppercase mb-16 text-blue-600 opacity-20">SUP OCEAN</h2>
-                <h2 class="text-5xl font-black grotesk uppercase mb-12 relative -mt-32">Прокат SUP-бордов</h2>
+                <div class="overflow-hidden">
+                    <h2 class="text-huge font-black grotesk uppercase mb-16 text-blue-600 opacity-20 whitespace-nowrap">SUP OCEAN</h2>
+                </div>
+                <h2 class="text-5xl font-black grotesk uppercase mb-12 relative -mt-32">Сапборды Funwater</h2>
                 
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-16">
-                    <!-- 1 -->
                     <div class="bg-white p-6 rounded-3xl border border-blue-100 flex flex-col">
-                        <div class="aspect-square rounded-2xl overflow-hidden mb-4"><img src="suparenda.webp" class="w-full h-full object-cover"></div>
-                        <h4 class="font-black uppercase mb-2">Monkey 350 cм</h4>
-                        <p class="text-[10px] text-zinc-400 mb-4">Для всех</p>
-                        <p class="font-black text-blue-600 mt-auto">1000₽/час</p>
+                        <div class="aspect-square rounded-2xl overflow-hidden mb-4"><img src="suparenda.webp" width="400" height="400" class="w-full h-full object-cover" alt="Universal 10.6" loading="lazy"></div>
+                        <h4 class="font-black uppercase mb-1">Universal 10.6</h4>
+                        <p class="text-[10px] text-zinc-400 mb-4">Для новичков</p>
+                        <p class="font-black text-blue-600 mt-auto">600₽/час</p>
                     </div>
-                    <!-- 2 -->
                     <div class="bg-white p-6 rounded-3xl border border-blue-100 flex flex-col">
-                        <div class="aspect-square rounded-2xl overflow-hidden mb-4"><img src="koi_sup_sudak.webp" class="w-full h-full object-cover"></div>
-                        <h4 class="font-black uppercase mb-2">Koi 350 см</h4>
+                        <div class="aspect-square rounded-2xl overflow-hidden mb-4"><img src="koi_sup_sudak.webp" width="400" height="400" class="w-full h-full object-cover" alt="Touring 12.6" loading="lazy"></div>
+                        <h4 class="font-black uppercase mb-1">Touring 12.6</h4>
                         <p class="text-[10px] text-zinc-400 mb-4">Для заплывов</p>
+                        <p class="font-black text-blue-600 mt-auto">800₽/час</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-3xl border border-blue-100 flex flex-col">
+                        <div class="aspect-square rounded-2xl overflow-hidden mb-4"><img src="sup1_sudak.webp" width="400" height="400" class="w-full h-full object-cover" alt="Family Board" loading="lazy"></div>
+                        <h4 class="font-black uppercase mb-1">Family Board</h4>
+                        <p class="text-[10px] text-zinc-400 mb-4">До 180 кг</p>
                         <p class="font-black text-blue-600 mt-auto">1000₽/час</p>
                     </div>
-                    <!-- 3 -->
                     <div class="bg-white p-6 rounded-3xl border border-blue-100 flex flex-col">
-                        <div class="aspect-square rounded-2xl overflow-hidden mb-4"><img src="sup1_sudak.webp" class="w-full h-full object-cover"></div>
-                        <h4 class="font-black uppercase mb-2">Family Board</h4>
-                        <p class="text-[10px] text-zinc-400 mb-4">Двое взрослых</p>
-                        <p class="font-black text-blue-600 mt-auto">1000₽/сутки</p>
-                    </div>
-                    <!-- 4 -->
-                    <div class="bg-white p-6 rounded-3xl border border-blue-100 flex flex-col">
-                        <div class="aspect-square rounded-2xl overflow-hidden mb-4"><img src="koi_sup_sudak.webp" class="w-full h-full object-cover"></div>
-                        <h4 class="font-black uppercase mb-2">Yoga Pro</h4>
+                        <div class="aspect-square rounded-2xl overflow-hidden mb-4"><img src="sup_sudak4.webp" width="400" height="400" class="w-full h-full object-cover" alt="Yoga SUP" loading="lazy"></div>
+                        <h4 class="font-black uppercase mb-1">Yoga SUP</h4>
                         <p class="text-[10px] text-zinc-400 mb-4">Устойчивый</p>
-                        <p class="font-black text-blue-600 mt-auto">1000₽/сутки</p>
+                        <p class="font-black text-blue-600 mt-auto">700₽/час</p>
                     </div>
-                    <!-- 5 -->
                     <div class="bg-white p-6 rounded-3xl border border-blue-100 flex flex-col">
-                        <div class="aspect-square rounded-2xl overflow-hidden mb-4"><img src="sup_sudak4.webp" class="w-full h-full object-cover"></div>
-                        <h4 class="font-black uppercase mb-2">JS</h4>
-                        <p class="text-[10px] text-zinc-400 mb-4">Узкий и быстрый</p>
-                        <p class="font-black text-blue-600 mt-auto">1000₽/сутки</p>
+                        <div class="aspect-square rounded-2xl overflow-hidden mb-4"><img src="prokat_sudak_1.webp" height="400" class="w-full h-full object-cover" alt="Sport Elite" loading="lazy"></div>
+                        <h4 class="font-black uppercase mb-1">Sport Elite</h4>
+                        <p class="text-[10px] text-zinc-400 mb-4">Скоростной</p>
+                        <p class="font-black text-blue-600 mt-auto">900₽/час</p>
                     </div>
-                    <!-- 6 -->
                     <div class="bg-white p-6 rounded-3xl border border-blue-100 flex flex-col">
-                        <div class="aspect-square rounded-2xl overflow-hidden mb-4"><img src="surfboard_sup_yog_sudak.webp" class="w-full h-full object-cover"></div>
-                        <h4 class="font-black uppercase mb-2">Kids SUP</h4>
+                        <div class="aspect-square rounded-2xl overflow-hidden mb-4"><img src="otdix_krim2026.webp" width="400" height="400" class="w-full h-full object-cover" alt="Kids SUP" loading="lazy"></div>
+                        <h4 class="font-black uppercase mb-1">Kids SUP</h4>
                         <p class="text-[10px] text-zinc-400 mb-4">Для детей</p>
-                        <p class="font-black text-blue-600 mt-auto">1000₽/сутки</p>
+                        <p class="font-black text-blue-600 mt-auto">500₽/час</p>
                     </div>
-                    <!-- 7 -->
                     <div class="bg-white p-6 rounded-3xl border border-blue-100 flex flex-col">
-                        <div class="aspect-square rounded-2xl overflow-hidden mb-4"><img src="prokat_sudak_1.webp" class="w-full h-full object-cover"></div>
-                        <h4 class="font-black uppercase mb-2">Комфорт</h4>
-                        <p class="text-[10px] text-zinc-400 mb-4">С сидением</p>
-                        <p class="font-black text-blue-600 mt-auto">1000₽/сутки</p>
+                        <div class="aspect-square rounded-2xl overflow-hidden mb-4"><img src="otdix_krim2026.webp" width="400" height="400" class="w-full h-full object-cover" alt="Wind SUP" loading="lazy"></div>
+                        <h4 class="font-black uppercase mb-1">Wind SUP</h4>
+                        <p class="text-[10px] text-zinc-400 mb-4">С парусом</p>
+                        <p class="font-black text-blue-600 mt-auto">1200₽/час</p>
                     </div>
-                    <!-- 8 -->
                     <div class="bg-white p-6 rounded-3xl border border-blue-100 flex flex-col">
-                        <div class="aspect-square rounded-2xl overflow-hidden mb-4"><img src="otdix_krim2026.webp" class="w-full h-full object-cover"></div>
-                        <h4 class="font-black uppercase mb-2">Sunset Edition</h4>
-                        <p class="text-[10px] text-zinc-400 mb-4">Для фотосессий</p>
-                        <p class="font-black text-blue-600 mt-auto">1000₽/сутки</p>
+                        <div class="aspect-square rounded-2xl overflow-hidden mb-4"><img src="otdix_krim2026.webp" width="400" height="400" class="w-full h-full object-cover" alt="Sunset Photo" loading="lazy"></div>
+                        <h4 class="font-black uppercase mb-1">Sunset Photo</h4>
+                        <p class="text-[10px] text-zinc-400 mb-4">Дизайнерский</p>
+                        <p class="font-black text-blue-600 mt-auto">800₽/час</p>
                     </div>
                 </div>
-
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
-                    <div class="space-y-6">
-                        <h4 class="text-xl font-black uppercase grotesk">Условия SUP-проката</h4>
-                        <div class="flex gap-4 flex-wrap">
-                            <span class="flex items-center gap-2 text-xs font-bold uppercase bg-white px-4 py-2 rounded-xl"><i data-lucide="shield" class="w-4 h-4 text-blue-600"></i> Комплекте: лодка, весло, страховочный лиш, механический насос</span>
-                            <span class="flex items-center gap-2 text-xs font-bold uppercase bg-white px-4 py-2 rounded-xl"><i data-lucide="smartphone" class="w-4 h-4 text-blue-600"></i> Гермомешок для телефона</span>
-                        </div>
-                        <p class="text-sm text-zinc-500">Бесплатный инструктаж 5-10 минут на пункте проката.</p>
+                <div class="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 text-sm">
+                    <div class="p-6 bg-white rounded-2xl">
+                        <p class="font-bold uppercase mb-2">Комплектация</p>
+                        <p class="text-zinc-500">Доска, весло, жилет, гермомешок для телефона и лиш входят в стоимость.</p>
                     </div>
-                    <div class="space-y-2">
-                        <div class="faq-item">
-                            <div class="faq-question" onclick="toggleFaq(this)"><span class="font-bold uppercase text-xs">Можно ли брать сап на рассвет?</span><i data-lucide="plus" class="faq-icon"></i></div>
-                            <div class="faq-answer">Да, по предварительной брони с вечера. Это самое популярное время для катания.</div>
-                            </div>
-                            <div class="faq-item">
-                            <div class="faq-question" onclick="toggleFaq(this)"><span class="font-bold uppercase text-xs">Выдаете в накачанном состоянии?</span><i data-lucide="plus" class="faq-icon"></i></div>
-                            <div class="faq-answer">Да, но можем и сдуть, если нужно будет транспортировать в другое место. Выдадим сумку и механический насос для удобства.</div>
-                                </div>
-                                <div class="faq-item">
-                             <div class="faq-question" onclick="toggleFaq(this)"><span class="font-bold uppercase text-xs">Есть ли доставка?</span><i data-lucide="plus" class="faq-icon"></i></div>
-                            <div class="faq-answer">Нет, вам нужно посетить наш прокат.</div>
+                    <div class="p-6 bg-white rounded-2xl">
+                        <p class="font-bold uppercase mb-2">Бронирование</p>
+                        <p class="text-zinc-500">Бронируйте сап на рассвет за день. Инструктаж на берегу проводим бесплатно.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ROUTES SECTION -->
+        <section class="py-24 px-6 bg-white overflow-hidden text-black">
+            <div class="max-w-7xl mx-auto">
+                <h2 class="text-4xl font-black grotesk uppercase mb-12">Куда поехать?</h2>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div class="route-card">
+                        <img src="https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?q=80&w=600" width="600" height="180" class="w-full h-48 object-cover" alt="Алчак" loading="lazy">
+                        <div class="p-6">
+                            <h4 class="font-bold uppercase mb-2">Гора Алчак</h4>
+                            <p class="text-xs text-zinc-500 mb-4">Легкий маршрут вдоль моря. Идеально для велосипеда или прогулки.</p>
+                            <a href="https://yandex.ru/maps/?rtext=~44.839446,34.990425" target="_blank" class="flex items-center justify-center gap-2 w-full bg-black text-white py-3 rounded-xl font-bold uppercase text-[10px] hover:bg-blue-600 transition-all">Маршрут <i data-lucide="navigation" class="w-3 h-3"></i></a>
+                        </div>
+                    </div>
+                    <div class="route-card">
+                        <img src="https://images.unsplash.com/photo-1558981403-c5f91cbba527?q=80&w=600" width="600" height="180" class="w-full h-48 object-cover" alt="Меганом" loading="lazy">
+                        <div class="p-6">
+                            <h4 class="font-bold uppercase mb-2">Маяк Меганом</h4>
+                            <p class="text-xs text-zinc-500 mb-4">15 минут на скутере. Самые чистые пляжи и красивые закаты.</p>
+                            <a href="https://yandex.ru/maps/?rtext=~44.793611,35.080556" target="_blank" class="flex items-center justify-center gap-2 w-full bg-black text-white py-3 rounded-xl font-bold uppercase text-[10px] hover:bg-blue-600 transition-all">Навигация <i data-lucide="navigation" class="w-3 h-3"></i></a>
+                        </div>
+                    </div>
+                    <div class="route-card">
+                        <img src="https://images.unsplash.com/photo-1597075095400-348259461168?q=80&w=600" width="600" height="180" class="w-full h-48 object-cover" alt="Таврида" loading="lazy">
+                        <div class="p-6">
+                            <h4 class="font-bold uppercase mb-2">АРТ Таврида</h4>
+                            <p class="text-xs text-zinc-500 mb-4">Поездка к арт-объектам через бухту Капсель.</p>
+                            <a href="https://yandex.ru/maps/?rtext=~44.8322,35.0561" target="_blank" class="flex items-center justify-center gap-2 w-full bg-black text-white py-3 rounded-xl font-bold uppercase text-[10px] hover:bg-blue-600 transition-all">Открыть <i data-lucide="navigation" class="w-3 h-3"></i></a>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- SEO HOME -->
+        <!-- ATMOSPHERE GALLERY -->
+        <section id="global-gallery" class="py-24 px-6 bg-zinc-900 overflow-hidden">
+            <div class="max-w-7xl mx-auto">
+                <h2 class="text-4xl md:text-6xl font-black grotesk uppercase mb-16 text-white text-center">Атмосфера проката</h2>
+                <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
+                    <div><img src="arenda_sapa_sudak.webp" alt="Прокат Сапов"></div>
+               <img src="sup_sudak4.jpg" alt="Йога на Сапах">
+               <img src="arenda_sapa3.webp" alt="Сапбординг">
+                <img src="surfboard__sudak_prokat.webp" alt="Электросамокаты">
+                <img src="arenda_sudak_2026.webp" alt="Прогулка">
+                <img src="scooter_krim2.webp" alt="Прокат Судак ">
+                <img src="scooter_krim.webp" alt="Прокат Скутера Крым ">
+               <img src="vento_retro_sudak.webp" alt="Прокат скутеров в Судаке ">
+               <img src="sudak_samokat_arenda2.webp" alt="Пункт проката в Судаке ">
+                <img src="sup_otdix_krim.webp" alt="Пункт проката Арт Таврида ">
+                <img src="versalsudak.webp" alt="Пункт проката Арт Таврида ">
+                 <img src="kak_otdoxnut_2026_krim.webp" alt="Меганом Судак отдых ">
+                 <img src="surfboard-sunrise-sudak.webp" alt="Пункт проката Меганом ">
+                <img src="procat_krim.webp" alt="Гостевой дом Судак 2026">
+                 <img src="procat_krim_sudak.webp" alt="Гостевой дом Версаль ">
+                 <img src="razvlechenia_2026_krim.webp" alt="Пункт проката Версаль ">
+                 <img src="razvlecheniya_sudak.webp" alt="Пункт проката мототехники ">
+                 <img src="scooters_sudak.webp" alt="Пункт проката велосипедов ">
+                 <img src="snyat_scooter.webp" alt="Пункт проката скутеров в Судаке "></div>
+                 <div><img src="sudak_samokat_4.webp" alt="Пункт проката электросамокатов в Судаке "></div>
+                 <div><img src="sup1_sudak.webp" alt="Пункт проката сапбордов"></div>
+                 <div><img src="velo_krin26.web" alt="Пляжи в Судаке "></div>
+                 <div><img src="velo_sudak4.webp" alt="Прогулки в в Судаке "></div>
+                 <div><img src="tri_scootera.webp" alt="Судак"></div>
+                <div><img src="uslugi_sudak.webp" alt="Отдых в Судаке "></div>
+                 <div><img src="electric_procat.webp" alt="Пункт проката Арт Таврида "></div>
+                  <div><img src="otdix_krim2026.webp" alt="Отдых Крым 2026 "></div>
+                 <div><img src="smart_procat.webp" alt="Пункт проката смартов "></div>
+                <div><img src="bicycle_sudak_arenda.webp" alt="Прокат велосипеда Судак ">
+                <!-- Сюда можно добавлять сколько угодно фото -->
+            </div>
+        </section>
+
+       <!-- SEO HOME -->
         <article class="seo-section bg-zinc-50">
             <h1>Аренда и прокат транспорта в Судаке — скутеры, велосипеды, электросамокаты, SUP-борды</h1>
             <p>Планируете провести отпуск в Крыму активно и без ограничений? <strong>Аренда и прокат транспорта в Судаке</strong> — оптимальное решение для туристов, которые ценят свободу передвижения, комфорт и собственный маршрут.</p>
@@ -439,72 +469,8 @@
         </article>
     </div>
 
-    <!-- ВЕЛОСИПЕДЫ (VIEW - Оставлен для навигации из меню) -->
-    <div id="view-bikes" class="view-section hidden-view">
-        <div class="pt-32 pb-24 px-6 max-w-7xl mx-auto text-black">
-            <button onclick="switchView('home')" class="mb-8 flex items-center gap-2 font-bold uppercase text-xs bg-zinc-100 px-4 py-2 rounded-full hover:bg-black hover:text-white transition-all"><i data-lucide="arrow-left" class="w-4 h-4"></i> Назад</button>
-            <h1 class="text-huge font-black grotesk uppercase mb-16">Велопарк</h1>
-            <section class="grid grid-cols-1 md:grid-cols-2 gap-12 mb-32">
-                <div class="product-card flex flex-col lg:flex-row gap-8">
-                    <div class="lg:w-1/2 aspect-square rounded-2xl overflow-hidden"><img src="https://images.unsplash.com/photo-1485965120184-e220f721d03e?q=80&w=400" class="w-full h-full object-cover"></div>
-                    <div class="lg:w-1/2 flex flex-col justify-center text-left">
-                        <h3 class="text-3xl font-black uppercase mb-4">Elite MTB 29"</h3>
-                        <p class="text-zinc-500 mb-6 text-sm">Горный найнер для серьезных маршрутов. Дисковые тормоза и 24 скорости.</p>
-                        <span class="text-2xl font-black text-blue-600">500₽ / час</span>
-                    </div>
-                </div>
-                <div class="product-card flex flex-col lg:flex-row gap-8">
-                    <div class="lg:w-1/2 aspect-square rounded-2xl overflow-hidden"><img src="https://images.unsplash.com/photo-1576435728678-68d0fbf94e91?q=80&w=400" class="w-full h-full object-cover"></div>
-                    <div class="lg:w-1/2 flex flex-col justify-center text-left">
-                        <h3 class="text-3xl font-black uppercase mb-4">City Cruise 26"</h3>
-                        <p class="text-zinc-500 mb-6 text-sm">Комфортный вариант для набережной и Кипарисовой аллеи.</p>
-                        <span class="text-2xl font-black text-blue-600">500₽ / час</span>
-                    </div>
-                </div>
-            </section>
-        </div>
-    </div>
 
-    <!-- ГЛОБАЛЬНАЯ ГАЛЕРЕЯ -->
-    <section id="global-gallery" class="py-24 px-6 bg-zinc-900 overflow-hidden">
-        <div class="max-w-7xl mx-auto">
-            <h2 class="text-6xl font-black grotesk uppercase mb-16 text-white text-center">Атмосфера проката</h2>
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 inner-gallery">
-                <div><img src="arenda_sapa_sudak.webp" alt="Прокат Сапов"></div>
-                <div><img src="sup_sudak4.jpg" alt="Йога на Сапах"></div>
-                <div><img src="arenda_sapa3.webp" alt="Сапбординг"></div>
-                <div><img src="surfboard__sudak_prokat.webp" alt="Электросамокаты"></div>
-                <div><img src="arenda_sudak_2026.webp" alt="Прогулка"></div>
-                <div><img src="scooter_krim2.webp" alt="Прокат Судак "></div>
-                <div><img src="scooter_krim.webp" alt="Прокат Скутера Крым "></div>
-                <div><img src="vento_retro_sudak.webp" alt="Прокат скутеров в Судаке "></div>
-                <div><img src="sudak_samokat_arenda2.webp" alt="Пункт проката в Судаке "></div>
-                <div><img src="sup_otdix_krim.webp" alt="Пункт проката Арт Таврида "></div>
-                <div><img src="versalsudak.webp" alt="Пункт проката Арт Таврида "></div>
-                 <div><img src="kak_otdoxnut_2026_krim.webp" alt="Меганом Судак отдых "></div>
-                 <div><img src="surfboard-sunrise-sudak.webp" alt="Пункт проката Меганом "></div>
-                <div><img src="procat_krim.webp" alt="Гостевой дом Судак 2026"></div>
-                 <div><img src="procat_krim_sudak.webp" alt="Гостевой дом Версаль "></div>
-                 <div><img src="razvlechenia_2026_krim.webp" alt="Пункт проката Версаль "></div>
-                 <div><img src="razvlecheniya_sudak.webp" alt="Пункт проката мототехники "></div>
-                 <div><img src="scooters_sudak.webp" alt="Пункт проката велосипедов "></div>
-                 <div><img src="snyat_scooter.webp" alt="Пункт проката скутеров в Судаке "></div>
-                 <div><img src="sudak_samokat_4.webp" alt="Пункт проката электросамокатов в Судаке "></div>
-                 <div><img src="sup1_sudak.webp" alt="Пункт проката сапбордов"></div>
-                 <div><img src="velo_krin26.web" alt="Пляжи в Судаке "></div>
-                 <div><img src="velo_sudak4.webp" alt="Прогулки в в Судаке "></div>
-                 <div><img src="tri_scootera.webp" alt="Судак"></div>
-                <div><img src="bicycle_sudak_arenda.webp" alt="Прокат велосипеда Судак "></div>
-                 <div><img src="electric_procat.webp" alt="Пункт проката Арт Таврида "></div>
-                  <div><img src="otdix_krim2026.webp" alt="Отдых Крым 2026 "></div>
-                 <div><img src="smart_procat.webp" alt="Пункт проката смартов "></div>
-                <div><img src="uslugi_sudak.webp" alt="Отдых в Судаке "></div>
-                <!-- Сюда можно добавлять сколько угодно фото -->
-            </div>
-        </div>
-    </section>
-
-    <!-- ОТЗЫВЫ -->
+  <!-- ОТЗЫВЫ -->
     <section id="reviews-section" class="py-24 px-6 bg-white text-black">
         <div class="max-w-7xl mx-auto">
             <div class="flex flex-col md:flex-row justify-between items-center mb-16 gap-6">
@@ -551,52 +517,84 @@
     </section>
 
     <!-- CONTACTS -->
-    <section id="contacts" class="py-24 px-6 bg-zinc-100 border-t border-zinc-200 text-black">
+    <section id="contacts" class="py-24 px-6 bg-zinc-100 border-t border-zinc-200 text-black overflow-hidden">
         <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16">
             <div class="space-y-12 text-left">
-                <h2 class="text-6xl font-black grotesk uppercase">Где мы находимся?</h2>
+                <h2 class="text-5xl md:text-6xl font-black grotesk uppercase">Где мы?</h2>
                 <div class="space-y-6">
-                    <div><p class="text-blue-600 uppercase text-[10px] font-bold mb-2 tracking-widest">Адрес</p><p class="text-3xl font-bold">Судак, Юбилейная 3/4</p></div>
-                    <div><p class="text-blue-600 uppercase text-[10px] font-bold mb-2 tracking-widest">Связь</p><a href="tel:+79785306550" class="text-3xl font-bold hover:text-blue-600 transition-all">+7 (978) 530-65-50</a></div>
+                    <div><p class="text-blue-600 uppercase text-[10px] font-bold mb-2 tracking-widest">Адрес</p><p class="text-2xl md:text-3xl font-bold">Судак, Юбилейная 3/4</p></div>
+                    <div><p class="text-blue-600 uppercase text-[10px] font-bold mb-2 tracking-widest">Связь</p><a href="tel:+79785306550" class="text-2xl md:text-3xl font-bold hover:text-blue-600 transition-all break-all">+7 (978) 530-65-50</a></div>
                 </div>
-                <div class="flex flex-col sm:flex-row gap-4">
-                    <a href="https://yandex.ru/maps/org/prokat_sudak/" target="_blank" class="inline-flex items-center justify-center gap-4 bg-black text-white px-10 py-5 rounded-2xl hover:bg-zinc-800 transition-all">
-                        <i data-lucide="map-pin"></i><span class="font-bold grotesk uppercase tracking-tight">Открыть Карты</span>
-                    </a>
-                </div>
+                <a href="https://yandex.ru/maps/org/prokat_sudak/" target="_blank" class="inline-flex items-center justify-center gap-4 bg-black text-white px-10 py-5 rounded-2xl hover:bg-zinc-800 transition-all">
+                    <i data-lucide="map-pin" aria-hidden="true"></i><span class="font-bold grotesk uppercase tracking-tight">Открыть Карты</span>
+                </a>
             </div>
-            <div class="h-[450px] rounded-3xl overflow-hidden shadow-2xl border-4 border-white"><iframe src="https://yandex.ru/map-widget/v1/?ll=34.974558%2C44.851603&z=17" width="100%" height="100%" frameborder="0"></iframe></div>
+            <div class="h-[300px] md:h-[450px] rounded-[2rem] overflow-hidden shadow-2xl border-4 border-white">
+                <iframe src="https://yandex.ru/map-widget/v1/?ll=34.974558%2C44.851603&z=17" width="100%" height="100%" frameborder="0" title="Карта проезда" loading="lazy"></iframe>
+            </div>
         </div>
     </section>
 
-    <footer class="py-12 px-6 bg-white text-center border-t border-zinc-100 text-zinc-400">
-        <p class="grotesk font-bold text-sm uppercase tracking-widest">© 2026 Прокат Судак — Крым. Все права защищены.</p>
+    <footer class="py-12 px-6 bg-white text-center border-t border-zinc-100 text-zinc-400 overflow-hidden">
+        <p class="grotesk font-bold text-xs md:text-sm uppercase tracking-widest">© 2026 Прокат Судак — Крым. Все права защищены.</p>
     </footer>
+    </main>
 
+    <!-- Scripts -->
+    <script src="https://unpkg.com/lucide@latest" defer></script>
+
+    <script>
+        function switchView(viewId) {
+            const views = ['home', 'bikes', 'scooters', 'e-scooters', 'sup'];
+            views.forEach(v => {
+                const el = document.getElementById('view-' + v);
+                if (el) el.classList.add('hidden-view');
+            });
+            const target = document.getElementById('view-' + viewId);
+            if (target) {
+                target.classList.remove('hidden-view');
+                if(window.lucide) window.lucide.createIcons();
+            }
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function toggleMenu() { 
+            const menu = document.getElementById('mobile-menu-overlay');
+            menu.classList.toggle('open'); 
+            menu.setAttribute('aria-hidden', !menu.classList.contains('open'));
+        }
+
+        function menuNavigate(v, a = null) {
+            if (document.getElementById('mobile-menu-overlay').classList.contains('open')) toggleMenu();
+            switchView(v);
+            if(a) setTimeout(() => {
+                const el = document.querySelector(a);
+                if (el) el.scrollIntoView({ behavior: 'smooth' });
+            }, 100);
+        }
+
+        function toggleFaq(el) { el.parentElement.classList.toggle('active'); }
+
+        window.addEventListener('load', () => {
+            if(window.lucide) window.lucide.createIcons();
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = "1";
+                        entry.target.style.transform = "translateY(0)";
+                    }
+                });
+            }, { threshold: 0.05 });
+            document.querySelectorAll('section, article, .review-card, .product-card').forEach(el => {
+                el.style.opacity = "0";
+                el.style.transform = "translateY(20px)";
+                el.style.transition = "all 0.7s ease";
+                observer.observe(el);
+            });
+        });
+    </script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
