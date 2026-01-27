@@ -2,9 +2,9 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
     <title>Прокат Судак 2026 — Скутеры, Велосипеды, SUP и Самокаты</title>
-
+    
     <!-- SEO Meta Tags -->
     <meta name="description" content="Аренда транспорта в Судаке 2026: скутеры Vento, горные велосипеды, SUP-борды и электросамокаты. Маршруты на Меганом и Новый Свет.">
     <meta name="keywords" content="прокат скутеров судак, аренда велосипедов судак, арт таврида транспорт, VMC Vento Retro, Vento Smart 3, сапборды судак, аренда транспорта судак, прокат транспорта судак, прокат скутеров судак,
@@ -12,33 +12,40 @@
 прокат электросамокатов судак, sup борд судак, аренда sup судак, прокат сапбордов судак, sup прогулки судак, транспорт для арт тавриды, арт таврида прокат транспорта, аренда транспорта арт таврида, как добраться до арт тавриды судак,
 маршрут судак меганом, прокат транспорта меганом, маршрут судак новый свет, прокат транспорта новый свет, аренда транспорта крым, прокат транспорта крым, активный отдых судак, активный отдых крым,
 транспорт для туристов судак, летний прокат судак, аренда транспорта 2026 судак, лучший прокат судак, прокат без залога судак, прокат рядом со мной судак, юбилейная 3 4 судак прокат, прокат у моря судак">
-
-    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Preconnect -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700;900&family=Space+Grotesk:wght@300;500;700&display=swap" rel="stylesheet">
-
-    <!-- Внешние библиотеки -->
-    <script src="https://unpkg.com/lucide@latest"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-
+    <link rel="preconnect" href="https://images.unsplash.com">
+    <link rel="preconnect" href="https://unpkg.com">
+    
+    <script src="https://cdn.tailwindcss.com" defer></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700;900&family=Space+Grotesk:wght@300;500;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+    
     <style>
         :root {
             --accent: #0066FF;
             --dark: #121212;
             --light: #F5F5F7;
         }
+        html, body {
+            max-width: 100%;
+            overflow-x: hidden;
+            position: relative;
+        }
         body {
             font-family: 'Inter', sans-serif;
             background-color: var(--light);
             color: var(--dark);
             scroll-behavior: smooth;
+            -webkit-font-smoothing: antialiased;
         }
         .grotesk { font-family: 'Space Grotesk', sans-serif; }
         .text-huge {
             font-size: clamp(3rem, 15vw, 12rem);
             line-height: 0.85;
             letter-spacing: -0.05em;
+            word-wrap: break-word;
         }
         .tg-float {
             position: fixed;
@@ -53,8 +60,7 @@
             transition: transform 0.3s ease;
         }
         .tg-float:hover { transform: scale(1.1) rotate(10deg); }
-
-        /* FAQ Styles */
+        
         .faq-item { border-bottom: 1px solid #e5e7eb; }
         .faq-question { cursor: pointer; padding: 1.5rem 0; display: flex; justify-content: space-between; align-items: center; text-align: left; }
         .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.4s ease-out, padding 0.3s ease; color: #4b5563; }
@@ -62,82 +68,103 @@
         .faq-item.active .faq-icon { transform: rotate(45deg); }
         .faq-icon { transition: transform 0.3s ease; }
 
-        /* Views Logic */
-        .view-section { transition: opacity 0.4s ease; opacity: 1; position: relative; width: 100%; }
+        .view-section { transition: opacity 0.4s ease; opacity: 1; position: relative; width: 100%; overflow-x: hidden; }
         .hidden-view { display: none !important; opacity: 0; }
-
-        /* SEO Content */
+        
         .seo-section { max-width: 64rem; margin: 0 auto; padding: 4rem 1.5rem; }
         .seo-section h2 { font-size: 2.25rem; font-weight: 900; text-transform: uppercase; margin-bottom: 1.5rem; font-family: 'Space Grotesk'; }
-        .seo-section h3 { font-size: 1.5rem; font-weight: 700; margin-top: 2.5rem; margin-bottom: 1rem; color: var(--accent); }
         .seo-section p { margin-bottom: 1.2rem; line-height: 1.8; color: #374151; font-size: 1.1rem; }
 
-        /* Review & Routes */
         .review-card { background: white; border-radius: 1.5rem; padding: 2rem; border: 1px solid #f0f0f0; }
         .route-card { border-radius: 2rem; background: white; overflow: hidden; border: 1px solid #eee; display: flex; flex-direction: column; height: 100%; transition: transform 0.3s ease; }
         .route-card:hover { transform: translateY(-8px); }
-        .route-map-overlay { position: relative; height: 160px; background: #f0f0f0; overflow: hidden; border-radius: 1rem; margin: 1rem; margin-top: auto; }
+        .product-card { background: white; border-radius: 2.5rem; padding: 2rem; border: 1px solid #eee; height: 100%; }
 
-        /* Mobile Menu */
         #mobile-menu-overlay { transition: transform 0.5s cubic-bezier(0.77,0.2,0.05,1.0); transform: translateY(-100%); }
         #mobile-menu-overlay.open { transform: translateY(0); }
-
-        .price-tag { background: var(--accent); color: white; padding: 4px 12px; border-radius: 99px; font-weight: 700; font-size: 0.875rem; }
-
-        #sun-canvas-container {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 0;
-            pointer-events: none;
-            background: linear-gradient(to bottom, #f0f4f8 0%, #ffffff 100%);
+        
+        /* Hero background styling */
+        .hero-bg {
+            background-image: linear-gradient(to top, rgba(255,255,255,1) 0%, rgba(255,255,255,0.4) 50%, rgba(255,255,255,0.1) 100%), 
+                             <img src="electricscooter_sudak2.webp"> class="w-full h-full object-cover" alt="Прокат в Судаке">;
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
         }
+        @media (max-width: 768px) {
+            .hero-bg { background-attachment: scroll; }
+        }
+        
         .hero-content { position: relative; z-index: 10; }
-        .product-card { background: white; border-radius: 2.5rem; padding: 2rem; border: 1px solid #eee; height: 100%; }
+        .route-map-overlay { position: relative; height: 120px; background: #f0f0f0; overflow: hidden; border-radius: 1rem; margin-top: auto; }
     </style>
 </head>
-<body class="overflow-x-hidden">
+<body class="overflow-x-hidden w-full">
 
-    <!-- Кнопка Telegram -->
-    <a href="https://t.me/your_telegram_link" target="_blank" class="tg-float" title="Написать в Telegram">
-        <i data-lucide="send"></i>
+    <main>
+    <!-- Telegram Button -->
+    <a href="https://t.me/your_telegram_link" target="_blank" class="tg-float" aria-label="Написать нам в Telegram">
+        <i data-lucide="send" aria-hidden="true"></i>
     </a>
 
-    <!-- Мобильное меню -->
-    <div id="mobile-menu-overlay" class="fixed inset-0 z-[100] bg-white flex flex-col p-8 overflow-y-auto">
+    <!-- Mobile Menu -->
+    <div id="mobile-menu-overlay" class="fixed inset-0 z-[100] bg-white flex flex-col p-8 overflow-y-auto" aria-hidden="true">
         <div class="flex justify-between items-center mb-12">
             <span class="grotesk font-bold text-xl uppercase text-black">Меню проката</span>
-            <button onclick="toggleMenu()" class="p-2 bg-zinc-100 rounded-full"><i data-lucide="x"></i></button>
+            <button onclick="toggleMenu()" class="p-2 bg-zinc-100 rounded-full" aria-label="Закрыть меню"><i data-lucide="x"></i></button>
         </div>
         <nav class="flex flex-col gap-6 text-black text-center md:text-left">
-            <a href="javascript:void(0)" onclick="menuNavigate('home')" class="grotesk text-4xl font-black uppercase">Главная</a>
+            <a href="#view-home" onclick="menuNavigate('home')" class="grotesk text-4xl font-black uppercase">Главная</a>
             <div class="h-[1px] bg-zinc-100 my-2"></div>
-            <a href="javascript:void(0)" onclick="menuNavigate('bikes')" class="grotesk text-3xl font-black uppercase">Велосипеды</a>
-            <a href="javascript:void(0)" onclick="menuNavigate('scooters')" class="grotesk text-3xl font-black uppercase">Скутеры</a>
-            <a href="javascript:void(0)" onclick="menuNavigate('e-scooters')" class="grotesk text-3xl font-black uppercase">Самокаты</a>
-            <a href="javascript:void(0)" onclick="menuNavigate('sup')" class="grotesk text-3xl font-black uppercase">Сапборды</a>
+            <a href="#scooters-block" onclick="menuNavigate('home', '#scooters-block')" class="grotesk text-3xl font-black uppercase">Скутеры</a>
+            <a href="#bikes-block" onclick="menuNavigate('home', '#bikes-block')" class="grotesk text-3xl font-black uppercase">Велосипеды</a>
+            <a href="#escooters-block" onclick="menuNavigate('home', '#escooters-block')" class="grotesk text-3xl font-black uppercase">Самокаты</a>
+            <a href="#sup-block" onclick="menuNavigate('home', '#sup-block')" class="grotesk text-3xl font-black uppercase">Сапборды</a>
             <div class="h-[1px] bg-zinc-100 my-2"></div>
-            <a href="javascript:void(0)" onclick="menuNavigate('home', '#reviews-section')" class="grotesk text-4xl font-black uppercase">Отзывы</a>
-            <a href="javascript:void(0)" onclick="menuNavigate('home', '#contacts')" class="grotesk text-4xl font-black uppercase">Контакты</a>
+            <a href="#reviews-section" onclick="menuNavigate('home', '#reviews-section')" class="grotesk text-4xl font-black uppercase">Отзывы</a>
+            <a href="#contacts" onclick="menuNavigate('home', '#contacts')" class="grotesk text-4xl font-black uppercase">Контакты</a>
         </nav>
     </div>
 
-    <!-- Общая навигация -->
+    <!-- Navigation -->
     <nav class="fixed top-0 w-full z-50 mix-blend-difference text-white p-6 flex justify-between items-center">
-        <a href="javascript:void(0)" onclick="switchView('home')" class="grotesk font-bold text-2xl tracking-tighter uppercase">Судак / Прокат</a>
+        <a href="#view-home" onclick="switchView('home')" class="grotesk font-bold text-2xl tracking-tighter uppercase">Судак / Прокат</a>
         <div class="hidden md:flex gap-8 uppercase text-xs font-bold tracking-widest">
-            <a href="javascript:void(0)" onclick="switchView('home')" class="hover:opacity-50">Главная</a>
-            <a href="javascript:void(0)" onclick="menuNavigate('home', '#bikes-block')" class="hover:opacity-50">Вело</a>
-            <a href="javascript:void(0)" onclick="menuNavigate('home', '#scooters-block')" class="hover:opacity-50">Скутеры</a>
-            <a href="javascript:void(0)" onclick="menuNavigate('home', '#escooters-block')" class="hover:opacity-50">Самокаты</a>
-            <a href="javascript:void(0)" onclick="menuNavigate('home', '#sup-block')" class="hover:opacity-50">SUP</a>
+            <a href="#view-home" onclick="switchView('home')" class="hover:opacity-50">Главная</a>
+            <a href="#scooters-block" onclick="menuNavigate('home', '#scooters-block')" class="hover:opacity-50">Скутеры</a>
+            <a href="#bikes-block" onclick="menuNavigate('home', '#bikes-block')" class="hover:opacity-50">Вело</a>
+            <a href="#escooters-block" onclick="menuNavigate('home', '#escooters-block')" class="hover:opacity-50">Самокаты</a>
+            <a href="#sup-block" onclick="menuNavigate('home', '#sup-block')" class="hover:opacity-50">SUP</a>
         </div>
-        <div class="md:hidden cursor-pointer" onclick="toggleMenu()"><i data-lucide="menu"></i></div>
+        <div class="md:hidden cursor-pointer" onclick="toggleMenu()" aria-label="Открыть меню"><i data-lucide="menu"></i></div>
     </nav>
 
-    <!-- ГЛАВНАЯ СТРАНИЦА -->
+    <!-- HOME VIEW -->
+    <div id="view-home" class="view-section">
+        <header class="min-h-screen flex flex-col justify-end p-6 pb-20 relative overflow-hidden hero-bg">
+            <div class="hero-content">
+                <div class="absolute top-20 right-6 opacity-10 hidden lg:block text-right text-zinc-900">
+                    <p class="text-huge font-black grotesk uppercase leading-none">VELO<br>bike</p>
+                </div>
+                <h1 class="text-huge font-black grotesk uppercase mb-8 mix-blend-multiply text-black">Прокат<br>Судак</h1>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 items-end text-black">
+                    <p class="max-w-xs text-lg font-light">Индивидуальный транспорт для исследования самых красивых уголков Крыма. Мы находимся возле аквапарка в Судаке.</p>
+                    <div>
+                        <address class="not-italic text-xs font-bold uppercase mb-2">ул. Юбилейная 3/4</address>
+                        <a href="tel:+79785306550" class="text-2xl font-bold">+7 (978) 530-65-50</a>
+                    </div>
+                    <div class="flex lg:justify-end">
+                        <a href="#gallery-main" class="bg-black text-white px-8 py-4 rounded-full font-bold uppercase text-sm hover:bg-blue-600 transition-colors">Выбрать технику</a>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+
+
+
+
+   <!-- ГЛАВНАЯ СТРАНИЦА -->
     <div id="view-home" class="view-section">
         <header class="min-h-screen flex flex-col justify-end p-6 pb-20 relative bg-white overflow-hidden">
             <div id="sun-canvas-container"></div>
@@ -603,6 +630,7 @@
     </footer>
 </body>
 </html>
+
 
 
 
